@@ -6245,7 +6245,7 @@ cv.setAttribute('aria-hidden', 'true');
 D.body.insertBefore(cv, D.body.firstChild);
 var ctx = cv.getContext('2d');
 var mq = W.matchMedia ? W.matchMedia('(prefers-reduced-motion: reduce)') : null;
-var reduced = !!(mq && mq.matches);
+var reduced = true;
 var dpr = 1, vw = 1, vh = 1, sprites = {}, motifs = [];
 var cur = PAL.ink, prev = PAL.ink, curKey = 'ink', fadeStart = -1e9;
 var scrollY = 0, mx = 0.5, my = 0.5, sx = 0.5, sy = 0.5;
@@ -6255,7 +6255,7 @@ function wrap(v, n) { return ((v % n) + n) % n; }
 function ss(a, b, x) { var t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); }
 function makeMotifs() {
 var lite = (navigator.hardwareConcurrency || 8) <= 4 || vw < 900;
-var count = Math.round((vw < 760 ? 40 : 64) * (lite ? 0.6 : 1));
+var count = Math.round((vw < 760 ? 48 : 90) * (lite ? 0.8 : 1));
 for (var i = 0; i < count; i++) {
 var type = TYPES[Math.floor(Math.random() * TYPES.length)];
 var z = rnd(0.25, 1);
@@ -6263,7 +6263,7 @@ var cols = Math.max(1, Math.ceil(Math.sqrt(count * vw / Math.max(1, vh)))), rows
 motifs.push({
 type: type,
 role: type === 'dots' || type === 'diamond' ? 0 : (type === 'lotus' ? 1 : 2),
-x: (i % cols + rnd(0.12, 0.88)) / cols, y: (Math.floor(i / cols) + rnd(0.12, 0.88)) / rows, z: z,
+x: (i % cols + rnd(0.2, 0.8)) / cols, y: (Math.floor(i / cols) + rnd(0.2, 0.8)) / rows, z: z,
 size: rnd(44, 120) * (0.6 + 0.4 * z),
 rot: rnd(0, TAU), spin: rnd(-0.02, 0.02),
 vx: rnd(-0.008, 0.008), vy: rnd(-0.006, 0.006),
