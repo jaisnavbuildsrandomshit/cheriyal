@@ -2375,7 +2375,7 @@ opacity:.58;
 /* a scene that is not current leaves the layout entirely: no stacking of scene content */
 .scene:not(.is-in)>.stage{display:none!important}
 .scene.is-in>.stage{display:flex!important}
-/* scene backgrounds (grid, colour) restored */
+.scene{background:transparent!important}
 .scene>.stage{position:fixed!important;inset:0;height:100vh;height:100svh;visibility:hidden}
 .scene.is-in>.stage{visibility:visible}
 html.no-vt .scene>.stage{opacity:0;transition:opacity .45s ease,visibility 0s .45s}
@@ -6228,7 +6228,7 @@ emit('ready', Deck.current);
 })();
 (function () {
 var W = window, D = document;
-if (!W.Deck || !D.body || !W.HTMLCanvasElement)
+if (true || !W.Deck || !D.body || !W.HTMLCanvasElement)
 return;
 var PAL = {
 ink: ['#f4ead8', '#e0a226', '#c4281c'],
