@@ -6259,10 +6259,11 @@ var count = Math.round((vw < 760 ? 40 : 64) * (lite ? 0.6 : 1));
 for (var i = 0; i < count; i++) {
 var type = TYPES[Math.floor(Math.random() * TYPES.length)];
 var z = rnd(0.25, 1);
+var cols = Math.max(1, Math.ceil(Math.sqrt(count * vw / Math.max(1, vh)))), rows = Math.max(1, Math.ceil(count / cols));
 motifs.push({
 type: type,
 role: type === 'dots' || type === 'diamond' ? 0 : (type === 'lotus' ? 1 : 2),
-x: Math.random(), y: Math.random(), z: z,
+x: (i % cols + rnd(0.12, 0.88)) / cols, y: (Math.floor(i / cols) + rnd(0.12, 0.88)) / rows, z: z,
 size: rnd(44, 120) * (0.6 + 0.4 * z),
 rot: rnd(0, TAU), spin: rnd(-0.02, 0.02),
 vx: rnd(-0.008, 0.008), vy: rnd(-0.006, 0.006),
@@ -6366,7 +6367,7 @@ var m = motifs[i];
 var X = wrap(m.x * vw + m.dx + px * m.z, W2) - 120;
 var Y = wrap(m.y * vh + m.dy - sy0 * m.z + py * m.z, H2) - 120;
 var edge = Math.max(Math.abs(X / vw - 0.5), Math.abs(Y / vh - 0.5)) * 2;
-var a = m.alpha * (0.18 + 0.82 * ss(0.2, 0.85, edge));
+var a = m.alpha * (0.6 + 0.4 * ss(0.2, 0.85, edge));
 var s = m.size, c = Math.cos(m.rot) * dpr, n = Math.sin(m.rot) * dpr;
 ctx.setTransform(c, n, -n, c, X * dpr, Y * dpr);
 if (fading) {
@@ -10460,7 +10461,7 @@ D.querySelectorAll('.s14-list, .s14-side').forEach(function (n) { n.setAttribute
 function sync() {
 if (!W.Deck || !W.Deck.scenes) return;
 var cur = W.Deck.current && W.Deck.current.id;
-var bgc = document.getElementById('cv-bg'); if (bgc) bgc.style.display = (cur === 's01') ? '' : 'none';
+var bgc = document.getElementById('cv-bg'); if (bgc) bgc.style.visibility = (cur === 's01') ? 'visible' : 'hidden';
 W.Deck.scenes.forEach(function (r) {
 var st = r.el && r.el.querySelector('.stage');
 if (!st) return;
