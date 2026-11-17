@@ -6228,7 +6228,7 @@ emit('ready', Deck.current);
 })();
 (function () {
 var W = window, D = document;
-if (true || !W.Deck || !D.body || !W.HTMLCanvasElement)
+if (!W.Deck || !D.body || !W.HTMLCanvasElement)
 return;
 var PAL = {
 ink: ['#f4ead8', '#e0a226', '#c4281c'],
@@ -10460,6 +10460,7 @@ D.querySelectorAll('.s14-list, .s14-side').forEach(function (n) { n.setAttribute
 function sync() {
 if (!W.Deck || !W.Deck.scenes) return;
 var cur = W.Deck.current && W.Deck.current.id;
+var bgc = document.getElementById('cv-bg'); if (bgc) bgc.style.display = (cur === 's01') ? '' : 'none';
 W.Deck.scenes.forEach(function (r) {
 var st = r.el && r.el.querySelector('.stage');
 if (!st) return;
