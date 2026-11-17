@@ -1423,9 +1423,8 @@ radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(0,0,0,.35) 100%); }
 #s08 .s8-panes { position: relative; flex: 1 1 auto; min-height: 0; width: 100%; max-width: 1840px; margin-inline: auto; }
 #s08 .pane { position: absolute; inset: 0; opacity: 0; visibility: hidden; pointer-events: none;
 transition: opacity .45s var(--ease), visibility 0s .45s; }
-/* only the active pane exists in layout: no stacking in any browser */
-#s08 .pane{display:none!important}
-#s08:not([data-step]) .p0,#s08[data-step="0"] .p0,#s08[data-step="1"] .p1,#s08[data-step="2"] .p2,#s08[data-step="3"] .p3,#s08[data-step="4"] .p4{display:block!important}
+/* only the active pane exists in layout: inactive panes are removed, active keeps its own layout */
+#s08:not([data-step]) .pane:not(.p0),#s08[data-step="0"] .pane:not(.p0),#s08[data-step="1"] .pane:not(.p1),#s08[data-step="2"] .pane:not(.p2),#s08[data-step="3"] .pane:not(.p3),#s08[data-step="4"] .pane:not(.p4){display:none!important}
 #s08 .pane.p0, #s08[data-step="1"] .p1, #s08[data-step="2"] .p2, #s08[data-step="3"] .p3, #s08[data-step="4"] .p4 { }
 #s08:not([data-step]) .p0, #s08[data-step="0"] .p0,
 #s08[data-step="1"] .p1, #s08[data-step="2"] .p2, #s08[data-step="3"] .p3, #s08[data-step="4"] .p4 {
@@ -5213,7 +5212,14 @@ closeSrc();
 if (old && !Deck.reduced && W.cherMorph) {
 curIdx = i;
 pendingEnter = true;
-W.cherMorph(old, scenes[i], function () { pendingEnter = false; curIdx = old.index; doEnter(i, step, old, dir); }, function () { update(); });
+W.cherMorph(old, scenes[i], function () { pendingEnter = false; curIdx = old.index; doEnter(i, step, old, dir); }, function () {
+update();
+if (queuedDir) {
+var qd = queuedDir;
+queuedDir = 0;
+setTimeout(function () { if (qd > 0) next(); else prev(); }, 30);
+}
+});
 return;
 }
 doEnter(i, step, old, dir);
@@ -5382,28 +5388,36 @@ var i = resolve(idOrIndex);
 if (i < 0)
 return;
 var r = scenes[i], s = clamp(parseInt(step, 10) || 0, 0, r.steps);
-scrollToY(r.top + s * SH, instant);
+tIdx = i;
+tStep = s;
+scrollToY(r.top + s * SH, true);
 };
+var tIdx = -1, tStep = 0;
+function base() {
+if ((locked || pendingEnter) && tIdx >= 0)
+return { i: tIdx, s: tStep };
+return { i: curIdx, s: curStep };
+}
 function next() {
-if (locked || curIdx < 0)
+if (curIdx < 0)
 return;
-var r = scenes[curIdx];
-if (curStep < r.steps)
-Deck.go(curIdx, curStep + 1);
-else if (curIdx < scenes.length - 1)
-Deck.go(curIdx + 1, 0);
+var b = base(), r = scenes[b.i];
+if (b.s < r.steps)
+Deck.go(b.i, b.s + 1);
+else if (b.i < scenes.length - 1)
+Deck.go(b.i + 1, 0);
 }
 function prev() {
-if (locked || curIdx < 0)
+if (curIdx < 0)
 return;
-if (curStep > 0)
-Deck.go(curIdx, curStep - 1);
-else if (curIdx > 0) {
-var p = scenes[curIdx - 1];
+var b = base();
+if (b.s > 0)
+Deck.go(b.i, b.s - 1);
+else if (b.i > 0) {
+var p = scenes[b.i - 1];
 Deck.go(p.index, p.steps);
 }
-}
-Deck.next = next;
+}Deck.next = next;
 Deck.prev = prev;
 Deck.smooth = sm;
 function scheduleHash() {
