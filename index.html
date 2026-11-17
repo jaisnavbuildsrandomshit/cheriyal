@@ -2386,6 +2386,7 @@ body{transition:background-color .7s cubic-bezier(.4,0,.2,1)}
 ::view-transition-old(vt-title),::view-transition-new(vt-title),::view-transition-old(vt-kick),::view-transition-new(vt-kick){height:100%;width:auto;object-fit:none;object-position:left center}
 ::view-transition-old(vt-art),::view-transition-new(vt-art){height:100%;width:100%;object-fit:contain}
 #cher-tx,#cher-sweep{display:none!important}
+.cl-t .cl-sub{display:block;margin-top:.35em;font:500 .62em/1.3 var(--f-body);letter-spacing:0;opacity:.85}
 /* ===== Iceberg ===== */
 #s07 .stage{padding:0;overflow:hidden;background:#18245a}
 #s07 .ib-art{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -2537,7 +2538,7 @@ body{transition:background-color .7s cubic-bezier(.4,0,.2,1)}
 <a class="sp-a" id="sp-a" target="_blank" rel="noopener noreferrer" hidden>Open source &#8599;</a>
 </div>
 <main id="deck">
-<section class="scene bg-ink" id="s01" data-title="Opening" data-kicker="Cheriyal · World Cultures" data-speaker="all" data-steps="3" data-time="60">
+<section class="scene bg-ink" id="s01" data-title="Opening" data-kicker="Cheriyal · Scrolls and masks" data-speaker="all" data-steps="3" data-time="60">
 <div class="stage">
 <div class="s01-halo" aria-hidden="true"><svg viewBox="-100 -100 200 200" focusable="false"></svg></div>
 <div class="s01-title">
@@ -2546,7 +2547,7 @@ body{transition:background-color .7s cubic-bezier(.4,0,.2,1)}
 </div>
 <div class="s01-mask"><canvas aria-label="A turning 3D Cheriyal mask that follows your pointer"></canvas></div>
 <canvas class="s01-swarm" aria-hidden="true"></canvas>
-<p class="s01-group label" data-in style="--d:9"><span>World Cultures</span><i></i><span>SPJSGM Mumbai</span></p>
+
 <p class="s01-hint label" data-step-out="1" data-fx="fade">Use <b>&larr;</b> <b>&rarr;</b> or scroll</p>
 <div class="s01-side s01-left">
 <div class="s01-q" data-step-in="1" data-step-out="3" data-fx="left">
@@ -3831,12 +3832,12 @@ body{transition:background-color .7s cubic-bezier(.4,0,.2,1)}
 <div class="cl-row">
 <p class="cl-q">Questions?</p>
 <div class="cl-by">
-<p class="label">SPJSGM Mumbai · World Cultures</p>
-<p class="cl-t">Culture as a tool for enhancing profitability</p>
+<p class="label">Made by</p>
+<p class="cl-t">Jaisnav Mohapatra<br><span class="cl-sub">Undergraduate student, S P Jain Global</span></p>
 </div>
 <a class="btn cl-link" href="#s14">Sources <span aria-hidden="true">→</span></a>
 </div>
-<div class="cl-crew"><p class="label">Presented by</p><ul id="s13-crew"><li>Group of ten presenters</li></ul></div>
+
 </div>
 <a class="cl-qrc" href="https://jaisnavbuildsrandomshit.github.io/cheriyal/studio.html" target="_blank" rel="noopener" aria-label="Open Cheriyal Mask Studio, make your own mask">
 <span class="label cl-qk">Scan · Make your own mask</span>
@@ -3915,29 +3916,10 @@ body{transition:background-color .7s cubic-bezier(.4,0,.2,1)}
 <li><a href="https://cyborlink.com/besite/india.htm" target="_blank" rel="noopener noreferrer" title="https://cyborlink.com/besite/india.htm"><span class="s14-t">Cyborlink</span><span class="s14-d">cyborlink.com</span></a></li>
 </ol>
 </section>
-<aside class="s14-side">
-<div class="s14-tbl" data-in style="--d:3">
-<p class="label">Group log</p>
-<table>
-<thead><tr><th scope="col">Student</th><th scope="col">Roll no.</th><th scope="col">Concept</th></tr></thead>
-<tbody>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-<tr><td></td><td></td><td></td></tr>
-</tbody>
-</table>
-</div>
-</aside>
+
 </div>
 </div>
-<template class="notes"><li>Full source list on screen</li><li>Group log</li></template>
+<template class="notes"><li>Full source list on screen</li></template>
 </section>
 </main>
 <script>"use strict";
@@ -5234,6 +5216,8 @@ var r = scenes[i];
 curIdx = i;
 curStep = -1;
 r.el.classList.add('is-in');
+if (W.cherSync)
+W.cherSync();
 setChrome(r);
 hook(r, 'enter', dir);
 setStep(step, dir);
@@ -6555,7 +6539,7 @@ function optical(yw, pt) {
 var w = Math.atan2(Math.sin(yw), Math.cos(yw)), a = Math.abs(w);
 var taper = 1 - sm((a - 1) / .5);
 compX = .068 * Math.tanh(w * 1.9) * taper * (.8 / ar);
-var cy = .037 + .087 * (pt - .03);
+var cy = -.006 + .087 * (pt - .03);
 var s = (compX * 100).toFixed(2) + '% ' + (cy * 100).toFixed(2) + '%';
 if (s !== lastOpt) {
 lastOpt = s;
@@ -6630,9 +6614,9 @@ par.x += ((mx - .5) * 2 - par.x) * (1 - Math.exp(-dt * 3));
 par.y += ((my - .5) * 2 - par.y) * (1 - Math.exp(-dt * 3));
 if (!reduced) {
 if (haloEl)
-haloEl.style.translate = (-par.x * 6).toFixed(1) + 'px ' + (-par.y * 5 - pScroll * 14).toFixed(1) + 'px';
+haloEl.style.translate = '0px 0px';
 if (maskEl)
-maskEl.style.translate = (par.x * 3).toFixed(1) + 'px ' + (par.y * 2 + pScroll * 6).toFixed(1) + 'px';
+maskEl.style.translate = '0px 0px';
 if (titleEl)
 titleEl.style.translate = (par.x * 12).toFixed(1) + 'px ' + (par.y * 8 - pScroll * 26).toFixed(1) + 'px';
 }
@@ -10257,7 +10241,7 @@ reader.setAttribute('aria-label', 'Reading edition');
 reader.setAttribute('role', 'dialog');
 reader.setAttribute('aria-modal', 'true');
 reader.setAttribute('aria-hidden', 'true');
-reader.innerHTML = '<button class="reader-close" aria-label="Close reading edition">Close &times;</button><header class="reader-head"><div class="reader-actions"><button data-print>Print / save PDF</button></div><p class="reader-kicker">Cheriyal / World Cultures / SPJSGM Mumbai</p><h1>The culture is not missing.<br><em>The credit is.</em></h1><p>A reading companion to the live presentation. Four acts trace the craft, the people, the market and a plan for credited, fairly valued cultural work.</p><p class="reader-disclaimer">Original group analysis, citations and speaker notes are preserved below. Illustrative masks and diagrams are presentation artwork; claims and recommendations remain attributed to their original sources.</p></header><div class="reader-body"></div>';
+reader.innerHTML = '<button class="reader-close" aria-label="Close reading edition">Close &times;</button><header class="reader-head"><div class="reader-actions"><button data-print>Print / save PDF</button></div><p class="reader-kicker">Cheriyal / Made by Jaisnav Mohapatra</p><h1>The culture is not missing.<br><em>The credit is.</em></h1><p>A reading companion to the live presentation. Four acts trace the craft, the people, the market and a plan for credited, fairly valued cultural work.</p><p class="reader-disclaimer">Original analysis, citations and notes are preserved below. Illustrative masks and diagrams are presentation artwork; claims and recommendations remain attributed to their original sources.</p></header><div class="reader-body"></div>';
 D.body.appendChild(reader);
 var rb = reader.querySelector('.reader-body');
 function esc(s) { var t = D.createElement('span'); t.textContent = s; return t.innerHTML; }
@@ -10483,11 +10467,18 @@ if (!cur || r.id === cur) st.style.removeProperty('display');
 else st.style.setProperty('display', 'none', 'important');
 });
 }
+W.cherSync = sync;
 setInterval(sync, 400);
 D.addEventListener('visibilitychange', sync);
 W.addEventListener('hashchange', sync);
+function kickResize() {
+[40, 250, 700, 1500].forEach(function (t) { setTimeout(function () { W.dispatchEvent(new Event('resize')); }, t); });
+}
+W.addEventListener('load', kickResize);
+D.addEventListener('fullscreenchange', kickResize);
 if (W.Deck) W.Deck.on('change', function (c) {
-sync(); if (c && c.el) { var s = W.Deck.scenes[c.index]; if (s) bg(s); } });
+sync();
+kickResize(); if (c && c.el) { var s = W.Deck.scenes[c.index]; if (s) bg(s); } });
 })();
 </script>
 </body></html>
