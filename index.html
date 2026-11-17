@@ -10459,7 +10459,21 @@ t.ready.catch(function () {});
 t.updateCallbackDone.then(after, after);
 };
 D.querySelectorAll('.s14-list, .s14-side').forEach(function (n) { n.setAttribute('data-native-scroll', ''); });
-if (W.Deck) W.Deck.on('change', function (c) { if (c && c.el) { var s = W.Deck.scenes[c.index]; if (s) bg(s); } });
+function sync() {
+if (!W.Deck || !W.Deck.scenes) return;
+var cur = W.Deck.current && W.Deck.current.id;
+W.Deck.scenes.forEach(function (r) {
+var st = r.el && r.el.querySelector('.stage');
+if (!st) return;
+if (!cur || r.id === cur) st.style.removeProperty('display');
+else st.style.setProperty('display', 'none', 'important');
+});
+}
+setInterval(sync, 400);
+D.addEventListener('visibilitychange', sync);
+W.addEventListener('hashchange', sync);
+if (W.Deck) W.Deck.on('change', function (c) {
+sync(); if (c && c.el) { var s = W.Deck.scenes[c.index]; if (s) bg(s); } });
 })();
 </script>
 </body></html>
