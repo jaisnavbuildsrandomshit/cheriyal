@@ -6228,7 +6228,7 @@ emit('ready', Deck.current);
 })();
 (function () {
 var W = window, D = document;
-if (true || !W.Deck || !D.body || !W.HTMLCanvasElement)
+if (!W.Deck || !D.body || !W.HTMLCanvasElement)
 return;
 var PAL = {
 ink: ['#f4ead8', '#e0a226', '#c4281c'],
