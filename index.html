@@ -1423,6 +1423,9 @@ radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(0,0,0,.35) 100%); }
 #s08 .s8-panes { position: relative; flex: 1 1 auto; min-height: 0; width: 100%; max-width: 1840px; margin-inline: auto; }
 #s08 .pane { position: absolute; inset: 0; opacity: 0; visibility: hidden; pointer-events: none;
 transition: opacity .45s var(--ease), visibility 0s .45s; }
+/* only the active pane exists in layout: no stacking in any browser */
+#s08 .pane{display:none!important}
+#s08:not([data-step]) .p0,#s08[data-step="0"] .p0,#s08[data-step="1"] .p1,#s08[data-step="2"] .p2,#s08[data-step="3"] .p3,#s08[data-step="4"] .p4{display:block!important}
 #s08 .pane.p0, #s08[data-step="1"] .p1, #s08[data-step="2"] .p2, #s08[data-step="3"] .p3, #s08[data-step="4"] .p4 { }
 #s08:not([data-step]) .p0, #s08[data-step="0"] .p0,
 #s08[data-step="1"] .p1, #s08[data-step="2"] .p2, #s08[data-step="3"] .p3, #s08[data-step="4"] .p4 {
