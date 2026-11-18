@@ -535,7 +535,8 @@ body.help-open .hp { transform: none; }
 html.reduced *, html.reduced *::before, html.reduced *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
 html.reduced [data-in], html.reduced [data-split] .wi { opacity: 1 !important; translate: none !important; scale: 1 !important; clip-path: none !important; transform: none !important; }
 html.reduced [data-step-in].on { opacity: 1 !important; translate: none !important; scale: 1 !important; }
-#cv-bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; display: block; }
+#cv-bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; display: block; }
+.scene > .stage { z-index: 1; }
 .stage { background: transparent; isolation: auto; }
 .stage > .bleed, .stage > .vignette { z-index: 0; }
 .stage > .wrap { position: relative; z-index: 2; }
@@ -2233,7 +2234,7 @@ opacity:.58;
 .band { border-radius:0; box-shadow:0 1px 0 rgba(255,244,219,.2),0 -1px 0 rgba(0,0,0,.22); }
 .src { border-radius:2px; letter-spacing:.09em; }
 .btn { border-radius:2px; }
-#s01 .stage { background:radial-gradient(ellipse at 50% 47%,#53201a 0,#28140f 42%,#120d0b 78%); }
+#s01 .stage { background:radial-gradient(ellipse at 50% 47%,rgba(83,32,26,.55) 0,rgba(40,20,15,.5) 42%,rgba(18,13,11,.35) 78%); }
 #s01 .s01-name { color:#f6ead4; text-shadow:0 3px 0 rgba(0,0,0,.12); }
 #s01 .s01-mask { filter:drop-shadow(0 24px 26px rgba(0,0,0,.34)); }
 #s01 .s01-thesis { letter-spacing:-.04em; }
