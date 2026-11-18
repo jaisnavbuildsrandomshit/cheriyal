@@ -153,9 +153,9 @@ transition: opacity .3s ease, translate .3s ease, scale .3s ease, clip-path .3s 
 .is-in [data-in] {
 opacity: 1; translate: 0 0; scale: 1;
 transition:
-opacity .7s var(--ease) calc(var(--d, 0) * 35ms),
-translate .8s var(--ease) calc(var(--d, 0) * 35ms),
-scale .8s var(--ease) calc(var(--d, 0) * 35ms),
+opacity 1.2s var(--ease) calc(var(--d, 0) * 60ms),
+translate 1.4s var(--ease) calc(var(--d, 0) * 60ms),
+scale 1.4s var(--ease) calc(var(--d, 0) * 60ms),
 clip-path .9s var(--ease) calc(var(--d, 0) * 35ms);
 }
 .is-in [data-in="mask"] { clip-path: inset(0 0 0 0); }
@@ -170,9 +170,9 @@ transition: opacity .3s ease, translate .3s ease, scale .3s ease;
 [data-step-in].on {
 opacity: 1; translate: 0 0; scale: 1; pointer-events: auto;
 transition:
-opacity .8s var(--ease) calc(var(--d, 0) * 90ms),
-translate .95s var(--ease) calc(var(--d, 0) * 90ms),
-scale .95s var(--ease) calc(var(--d, 0) * 90ms);
+opacity 1.3s var(--ease) calc(var(--d, 0) * 90ms),
+translate 1.5s var(--ease) calc(var(--d, 0) * 90ms),
+scale 1.5s var(--ease) calc(var(--d, 0) * 90ms);
 }
 [data-step-out] { transition: opacity .5s ease, translate .7s var(--ease); }
 [data-step-out].off { opacity: 0; translate: 0 -14px; pointer-events: none; }
@@ -2381,86 +2381,52 @@ opacity:.58;
 html.no-vt .scene>.stage{opacity:0;transition:opacity .45s ease,visibility 0s .45s}
 html.no-vt .scene.is-in>.stage{opacity:1;transition:opacity .45s ease}
 body{transition:background-color .7s cubic-bezier(.4,0,.2,1)}
-::view-transition-group(*){animation-duration:.78s;animation-timing-function:cubic-bezier(.6,0,.2,1)}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.55s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-group(*){animation-duration:1.5s;animation-timing-function:cubic-bezier(.6,0,.2,1)}
+::view-transition-old(root),::view-transition-new(root){animation-duration:1.1s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
 ::view-transition-old(vt-title),::view-transition-new(vt-title),::view-transition-old(vt-kick),::view-transition-new(vt-kick){height:100%;width:auto;object-fit:none;object-position:left center}
 ::view-transition-old(vt-art),::view-transition-new(vt-art){height:100%;width:100%;object-fit:contain}
 #cher-tx,#cher-sweep{display:none!important}
 .cl-t .cl-sub{display:block;margin-top:.35em;font:500 .62em/1.3 var(--f-body);letter-spacing:0;opacity:.85}
-/* ===== Iceberg ===== */
-#s07 .stage{padding:0;overflow:hidden;background:#18245a}
-#s07 .ib-art{position:absolute;inset:0;width:100%;height:100%;display:block}
-#s07 .ib-sun{transform-box:fill-box;transform-origin:center;animation:ib-sun 90s linear infinite;animation-play-state:paused}
-#s07.is-in .ib-sun{animation-play-state:running}
-#s07 .ib-wave{animation:ib-wave 9s linear infinite;animation-play-state:paused}
-#s07.is-in .ib-wave{animation-play-state:running}
-#s07 .ib-bub circle{animation:ib-bub 14s ease-in-out infinite alternate;animation-play-state:paused}
-#s07.is-in .ib-bub circle{animation-play-state:running}
-#s07 .ib-bub circle:nth-child(2n){animation-duration:19s}
-@keyframes ib-sun{to{rotate:360deg}}
-@keyframes ib-wave{to{translate:-36px 0}}
-@keyframes ib-bub{to{translate:0 -60px}}
-#s07 .ib-veil{opacity:.82;transition:opacity 1.1s ease}
-#s07:not([data-step="0"]) .ib-veil{opacity:0}
-#s07 .ib-lab .t{font-size:30px;font-weight:700;letter-spacing:.14em;fill:#f4ead8}
-#s07 .ib-lab .s{font-size:19px;letter-spacing:.04em;fill:#f4ead8;opacity:.72;font-family:var(--f-body)}
-#s07 .ib-lab .ld{stroke:#f4c35a;stroke-width:3}
-#s07 .ib-lab>g,#s07 .nd{opacity:0;transition:opacity .7s ease}
-#s07:not([data-step="0"]) .ib-lab>g{opacity:1}
-#s07:not([data-step="0"]) .ib-lab .l1{transition-delay:.15s}
-#s07:not([data-step="0"]) .ib-lab .l2{transition-delay:.3s}
-#s07 .nd .md{fill:#e0a226;stroke:#0f0b09;stroke-width:5}
-#s07 .nd.r1 .md{fill:#f4ead8}
-#s07 .nd.r2 .md{fill:#c4281c}
-#s07 .nd .gl *{stroke:#0f0b09;stroke-width:4;stroke-linejoin:round;fill:#f4ead8}
-#s07 .nd .gl .a{fill:#c4281c}#s07 .nd .gl .k{fill:#0f0b09}#s07 .nd .gl .ln{fill:none}
-#s07 .nd.r2 .gl .a{fill:#e0a226}
-#s07 .nd .tt{font:700 32px var(--f-display);fill:#0f0b09;letter-spacing:-.01em}
-#s07 .nd .ts{font:600 21px var(--f-body);fill:#1d2650}
-#s07 .nd-in{transform-box:fill-box;transform-origin:center;transition:scale .6s cubic-bezier(.2,1.3,.3,1)}
-#s07[data-step="1"] .nd,#s07[data-step="5"] .nd{opacity:1}
-#s07[data-step="1"] .r0{transition-delay:.35s}#s07[data-step="1"] .r1{transition-delay:.55s}#s07[data-step="1"] .r2{transition-delay:.75s}
-#s07[data-step="2"] .nd,#s07[data-step="3"] .nd,#s07[data-step="4"] .nd{opacity:.28}
-#s07[data-step="2"] .nd.c0,#s07[data-step="3"] .nd.c1,#s07[data-step="4"] .nd.c2{opacity:1}
-#s07[data-step="2"] .nd.c0 .nd-in,#s07[data-step="3"] .nd.c1 .nd-in,#s07[data-step="4"] .nd.c2 .nd-in{scale:1.12}
-#s07[data-step="2"] .nd.c0.r1,#s07[data-step="3"] .nd.c1.r1,#s07[data-step="4"] .nd.c2.r1{transition-delay:.45s}
-#s07[data-step="2"] .nd.c0.r2,#s07[data-step="3"] .nd.c1.r2,#s07[data-step="4"] .nd.c2.r2{transition-delay:.9s}
-#s07 .th{stroke-width:10;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.4s cubic-bezier(.6,0,.2,1)}
-#s07 .th0{stroke:#c4281c}#s07 .th1{stroke:#2b4fb8}#s07 .th2{stroke:#b9800f}
-#s07[data-step="2"] .th0,#s07[data-step="3"] .th0,#s07[data-step="3"] .th1,#s07[data-step="4"] .th0,#s07[data-step="4"] .th1,#s07[data-step="4"] .th2,#s07[data-step="5"] .th{stroke-dashoffset:0}
-#s07[data-step="3"] .th0,#s07[data-step="4"] .th0,#s07[data-step="4"] .th1{opacity:.3}
-#s07 .th{transition:stroke-dashoffset 1.4s cubic-bezier(.6,0,.2,1),opacity .6s ease}
-#s07 .ob{transform-box:fill-box;transform-origin:50% 100%;transition:scale .7s cubic-bezier(.2,1.3,.3,1),opacity .6s ease}
-#s07:not(.is-in) .ob{scale:.6;opacity:0}
-#s07.is-in .o1{transition-delay:.15s}#s07.is-in .o2{transition-delay:.3s}
-#s07[data-step="2"] .ob:not(.o0),#s07[data-step="3"] .ob:not(.o1),#s07[data-step="4"] .ob:not(.o2){opacity:.45}
-#s07 .ib-objlab text{font-size:22px;font-weight:700;letter-spacing:.16em;fill:#f4ead8}
-#s07 .ib-wl{font-size:16px;letter-spacing:.3em;fill:#f4ead8;opacity:.7}
-/* caption cartouche */
-#s07 .ib-cap{position:absolute;z-index:3;left:var(--pad);top:50%;translate:0 -50%;width:min(32vw,500px);padding:clamp(22px,3.4vh,38px) clamp(22px,2vw,34px);background:#17100df0;color:#f4ead7;display:grid}
-#s07 .ib-frame{position:absolute;inset:7px;border:2px solid #e0a226;pointer-events:none}
-#s07 .ib-frame::before{content:"";position:absolute;inset:4px;border:1px solid #e0a22666}
-#s07 .ib-c{grid-area:1/1;opacity:0;translate:0 14px;transition:opacity .45s ease,translate .6s cubic-bezier(.2,.8,.2,1);pointer-events:none;visibility:hidden;transition-property:opacity,translate,visibility}
-#s07[data-step="0"] [data-k="0"],#s07[data-step="1"] [data-k="1"],#s07[data-step="2"] [data-k="2"],#s07[data-step="3"] [data-k="3"],#s07[data-step="4"] [data-k="4"],#s07[data-step="5"] [data-k="5"]{opacity:1;translate:0 0;pointer-events:auto;visibility:visible;transition-delay:.18s}
-#s07 .ib-k{display:flex;align-items:center;gap:.8em;margin:0 0 .6em;color:#f4c35a}
-#s07 .ib-n{font-weight:700;color:#17100d;background:#f4c35a;padding:.3em .5em}
-#s07 .ib-h{font-size:clamp(28px,2.5vw,46px);line-height:1.04;margin:0 0 .45em}
-#s07 .ib-c .lede{margin:0;font-size:clamp(17px,1.3vw,22px)}
-#s07 .ib-q{margin:1em 0 0;font:italic 500 clamp(16px,1.2vw,20px)/1.3 var(--f-display);color:#f4c35a}
-#s07 .ib-legend,#s07 .ib-rows{list-style:none;margin:0;padding:0;display:grid;gap:.85em;font:clamp(14px,1.05vw,17px)/1.42 var(--f-body)}
-#s07 .ib-legend li{display:grid;gap:.25em}
-#s07 .ib-rows li{display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start}
-#s07 .ib-rows p{margin:0}
-#s07 .tg{font:700 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding:.35em .55em;justify-self:start;color:#17100d}
-#s07 .ib-rows .tg{width:30px;text-align:center;padding:.45em 0}
-#s07 .tg.t0{background:#e0a226}#s07 .tg.t1{background:#f4ead8}#s07 .tg.t2{background:#e04a33;color:#fff}
-#s07 .ib-quote{margin:0 0 1em;font:italic 500 clamp(16px,1.25vw,21px)/1.35 var(--f-display)}
-#s07 .ib-ev{margin:0;display:grid;gap:.6em;font:clamp(13px,.95vw,15px)/1.4 var(--f-body)}
-#s07 .ib-ev div{display:grid;grid-template-columns:7.5em 1fr;gap:.8em;border-top:1px solid #f4ead726;padding-top:.6em}
-#s07 .ib-ev dt{font:700 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#f4c35a}
-#s07 .ib-ev dd{margin:0}
-@media (max-width:899px){#s07 .ib-cap{top:auto;bottom:var(--chrome-bot);translate:none;left:12px;right:12px;width:auto;max-height:46vh;overflow:auto}}
-@media (prefers-reduced-motion:reduce){#s07 .ib-sun,#s07 .ib-wave,#s07 .ib-bub circle{animation:none!important}#s07 .th,#s07 .nd,#s07 .ib-c,#s07 .ob,#s07 .ib-veil{transition:none!important}}
+/* s07 · Cultural iceberg: one painted SVG, camera = scrubbed viewBox (scene.js). */
+#s07 .s07-art {
+  position: absolute; z-index: 0;
+  top: var(--chrome-top); bottom: var(--chrome-bot); left: 0; right: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+#s07 .s07-art svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: hidden; }
+#s07 .s07-art text { font-family: var(--f-mono); font-size: 36px; font-weight: 700; letter-spacing: .04em; fill: #0f0b09; }
+#s07 .s07-art .tiplab text { font-size: 19px; letter-spacing: .1em; }
+
+#s07 .s07-cap { position: relative; z-index: 2; width: min(40vw, 700px); display: grid; }
+#s07 .cap {
+  grid-area: 1 / 1;
+  opacity: 0; translate: 0 22px; pointer-events: none;
+  transition: opacity .9s var(--ease), translate 1s var(--ease);
+}
+#s07 .cap-0 { opacity: 1; translate: 0 0; pointer-events: auto; }
+#s07[data-step="1"] .cap-0, #s07[data-step="2"] .cap-0, #s07[data-step="3"] .cap-0 { opacity: 0; translate: 0 -22px; pointer-events: none; }
+#s07[data-step="1"] .cap-1, #s07[data-step="2"] .cap-2, #s07[data-step="3"] .cap-3 { opacity: 1; translate: 0 0; pointer-events: auto; }
+#s07 .cap .h1, #s07 .cap .h2 { margin: .2em 0 .35em; }
+#s07 .s07-note { margin-top: 1.4em; color: var(--mut); }
+#s07 .s07-items { display: grid; gap: 1.1em; margin-top: 1.1em; }
+#s07 .body strong { color: var(--acc); font-weight: 600; }
+
+@media (max-width: 760px) {
+  #s07 .s07-art { height: 47vh; bottom: auto; }
+  #s07 .s07-cap {
+    position: absolute; left: var(--pad); right: var(--pad);
+    top: calc(var(--chrome-top) + 47vh + 6px); bottom: calc(var(--chrome-bot) + 4px);
+    width: auto; align-content: start; overflow: hidden;
+  }
+  #s07 .cap .h1 { font-size: clamp(36px, 10vw, 48px); }
+  #s07 .cap .h2 { font-size: clamp(26px, 7.4vw, 34px); }
+  #s07 .cap .lede { font-size: 19px; }
+  #s07 .cap .body { font-size: 17px; }
+  #s07 .s07-items { gap: .7em; margin-top: .6em; }
+  #s07 .s07-note { margin-top: .8em; }
+}
+@media (prefers-reduced-motion: reduce) { #s07 .cap { transition: none; } }
 </style>
 </head><body>
 <div id="cher-frame" aria-hidden="true"><i class="bt"></i><i class="bb"></i><i class="sl"></i><i class="sr"></i><span class="cn c1"><svg viewBox='-20 -20 40 40'><circle r='18' fill='#17100d'/><path d='M0-15C5-8 5-4 0 0C-5-4-5-8 0-15ZM15 0C8 5 4 5 0 0C4-5 8-5 15 0ZM0 15C-5 8-5 4 0 0C5 4 5 8 0 15ZM-15 0C-8-5-4-5 0 0C-4 5-8 5-15 0Z' fill='#e0a226' stroke='#17100d' stroke-width='1.5'/><circle r='4' fill='#c4281c'/></svg></span><span class="cn c2"><svg viewBox='-20 -20 40 40'><circle r='18' fill='#17100d'/><path d='M0-15C5-8 5-4 0 0C-5-4-5-8 0-15ZM15 0C8 5 4 5 0 0C4-5 8-5 15 0ZM0 15C-5 8-5 4 0 0C5 4 5 8 0 15ZM-15 0C-8-5-4-5 0 0C-4 5-8 5-15 0Z' fill='#e0a226' stroke='#17100d' stroke-width='1.5'/><circle r='4' fill='#c4281c'/></svg></span><span class="cn c3"><svg viewBox='-20 -20 40 40'><circle r='18' fill='#17100d'/><path d='M0-15C5-8 5-4 0 0C-5-4-5-8 0-15ZM15 0C8 5 4 5 0 0C4-5 8-5 15 0ZM0 15C-5 8-5 4 0 0C5 4 5 8 0 15ZM-15 0C-8-5-4-5 0 0C-4 5-8 5-15 0Z' fill='#e0a226' stroke='#17100d' stroke-width='1.5'/><circle r='4' fill='#c4281c'/></svg></span><span class="cn c4"><svg viewBox='-20 -20 40 40'><circle r='18' fill='#17100d'/><path d='M0-15C5-8 5-4 0 0C-5-4-5-8 0-15ZM15 0C8 5 4 5 0 0C4-5 8-5 15 0ZM0 15C-5 8-5 4 0 0C5 4 5 8 0 15ZM-15 0C-8-5-4-5 0 0C-4 5-8 5-15 0Z' fill='#e0a226' stroke='#17100d' stroke-width='1.5'/><circle r='4' fill='#c4281c'/></svg></span></div>
@@ -2908,163 +2874,329 @@ body{transition:background-color .7s cubic-bezier(.4,0,.2,1)}
 </div>
 <template class="notes"><li>Fifteen generations: attributed claim</li><li>Master, not birth: apprenticeship</li><li>Women, under-documented</li><li>Who will follow?</li><li>Named family card</li></template>
 </section>
-<section class="scene bg-indigo" id="s07" data-title="Cultural iceberg" data-kicker="Concept 6 · Cultural iceberg" data-speaker="6" data-steps="5" data-time="90">
-<div class="stage">
-<svg class="ib-art" viewBox="-140 -20 1660 1500" preserveAspectRatio="xMinYMin meet" aria-hidden="true" focusable="false">
-<defs>
-<linearGradient id="ib-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24357a"/><stop offset=".55" stop-color="#18245a"/><stop offset="1" stop-color="#0c1236"/></linearGradient>
-<linearGradient id="ib-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8f2016"/><stop offset="1" stop-color="#b8301f"/></linearGradient>
-<linearGradient id="ib-sink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1236" stop-opacity="0"/><stop offset="1" stop-color="#0c1236" stop-opacity=".38"/></linearGradient>
-<pattern id="ib-ripple" width="120" height="44" patternUnits="userSpaceOnUse"><path d="M0 22 Q30 6 60 22 T120 22" fill="none" stroke="#f4ead8" stroke-width="2" opacity=".09"/></pattern>
-<pattern id="ib-scal" width="36" height="24" patternUnits="userSpaceOnUse"><path d="M0 0 Q18 26 36 0" fill="#e0a226" stroke="#0f0b09" stroke-width="3"/></pattern>
-<pattern id="ib-tri" width="40" height="22" patternUnits="userSpaceOnUse"><path d="M0 22 L20 2 L40 22 Z" fill="#c4281c" stroke="#0f0b09" stroke-width="3" stroke-linejoin="round"/></pattern>
-<symbol id="ib-flower" viewBox="-20 -20 40 40"><path d="M0-17C6-9 6-4 0 0C-6-4-6-9 0-17ZM17 0C9 6 4 6 0 0C4-6 9-6 17 0ZM0 17C-6 9-6 4 0 0C6 4 6 9 0 17ZM-17 0C-9-6-4-6 0 0C-4 6-9 6-17 0Z" fill="#f4c35a" stroke="#0f0b09" stroke-width="2.4"/><circle r="4" fill="#c4281c" stroke="#0f0b09" stroke-width="2"/></symbol>
-<clipPath id="ib-bodyclip"><path d="M500 300 L1110 300 L1300 370 L1420 520 L1480 720 L1450 880 L1490 1050 L1400 1250 L1200 1400 L900 1470 L640 1450 L400 1390 L240 1250 L170 1060 L210 880 L180 720 L230 530 L340 380 Z"/></clipPath>
-</defs>
-<!-- sky -->
-<rect x="-4000" y="-3000" width="9000" height="3300" fill="url(#ib-sky)"/>
-<g class="ib-sky-dec" opacity=".85">
-<use href="#ib-flower" x="-60" y="40" width="44" height="44"/><use href="#ib-flower" x="300" y="150" width="34" height="34"/><use href="#ib-flower" x="1380" y="210" width="40" height="40"/><use href="#ib-flower" x="160" y="-10" width="28" height="28"/><use href="#ib-flower" x="1500" y="40" width="30" height="30"/>
-</g>
-<g transform="translate(1250 110)"><g class="ib-sun">
-<path d="M0-86L12-58H-12ZM61-61L47-34L34-47ZM86 0L58 12V-12ZM61 61L34 47L47 34ZM0 86L-12 58H12ZM-61 61L-47 34L-34 47ZM-86 0L-58-12V12ZM-61-61L-34-47L-47-34Z" fill="#f4c35a" stroke="#0f0b09" stroke-width="4" stroke-linejoin="round"/>
-<circle r="48" fill="#e0a226" stroke="#0f0b09" stroke-width="5"/><circle r="26" fill="#c4281c" stroke="#0f0b09" stroke-width="4"/>
-</g></g>
-<!-- sea -->
-<rect x="-4000" y="300" width="9000" height="4000" fill="url(#ib-sea)"/>
-<rect x="-4000" y="320" width="9000" height="4000" fill="url(#ib-ripple)"/>
-<g class="ib-rays" fill="#f4ead8"><path d="M-80 312L-30 312L-180 1500L-330 1500Z" opacity=".05"/><path d="M420 312L470 312L520 1500L330 1500Z" opacity=".04"/><path d="M1180 312L1250 312L1520 1500L1320 1500Z" opacity=".05"/></g>
-<!-- submerged body -->
-<g class="ib-body">
-<path d="M500 300 L1110 300 L1300 370 L1420 520 L1480 720 L1450 880 L1490 1050 L1400 1250 L1200 1400 L900 1470 L640 1450 L400 1390 L240 1250 L170 1060 L210 880 L180 720 L230 530 L340 380 Z" fill="#d6e4f2"/>
-<g clip-path="url(#ib-bodyclip)">
-<rect class="ib-band b0" x="0" y="300" width="1600" height="350" fill="#e3edf7"/>
-<rect class="ib-band b1" x="0" y="650" width="1600" height="360" fill="#cbdcee"/>
-<rect class="ib-band b2" x="0" y="1010" width="1600" height="470" fill="#b2c8e2"/>
-<g stroke="#0f0b09" stroke-width="3" fill="none" opacity=".14"><path d="M340 380L620 520L760 300M620 520L560 650M1300 370L980 560L1110 300M980 560L1150 650M210 880L520 800L560 650M520 800L470 1010M1450 880L1120 820L1150 650M1120 820L1210 1010M240 1250L560 1150L470 1010M560 1150L640 1450M1400 1250L1060 1180L1210 1010M1060 1180L900 1470"/></g>
-<rect x="0" y="638" width="1600" height="24" fill="url(#ib-tri)"/>
-<rect x="0" y="998" width="1600" height="24" fill="url(#ib-tri)"/>
-<rect x="0" y="300" width="1600" height="1200" fill="url(#ib-sink)"/>
-</g>
-<path d="M500 300 L1110 300 L1300 370 L1420 520 L1480 720 L1450 880 L1490 1050 L1400 1250 L1200 1400 L900 1470 L640 1450 L400 1390 L240 1250 L170 1060 L210 880 L180 720 L230 530 L340 380 Z" fill="none" stroke="#0f0b09" stroke-width="8" stroke-linejoin="round"/>
-</g>
-<g class="ib-veil"><path d="M500 300 L1110 300 L1300 370 L1420 520 L1480 720 L1450 880 L1490 1050 L1400 1250 L1200 1400 L900 1470 L640 1450 L400 1390 L240 1250 L170 1060 L210 880 L180 720 L230 530 L340 380 Z" fill="#141d4d"/></g>
-<!-- band labels (in the water) -->
-<g class="ib-lab" font-family="var(--f-mono)" text-anchor="end">
-<g class="l0"><text x="150" y="474" class="t">KNOWLEDGE</text><text x="150" y="506" class="s">what makers know</text><path d="M162 466H250" class="ld"/></g>
-<g class="l1"><text x="150" y="824" class="t">SKILLS</text><text x="150" y="856" class="s">what hands can do</text><path d="M162 816H262" class="ld"/></g>
-<g class="l2"><text x="150" y="1184" class="t">RELATIONSHIPS</text><text x="150" y="1216" class="s">who they work with</text><path d="M162 1176H262" class="ld"/></g>
-</g>
-<!-- threads -->
-<g class="ib-threads" fill="none" stroke-linecap="round">
-<path class="th th0" pathLength="1" d="M640 296C640 380 330 360 330 432V1190"/>
-<path class="th th1" pathLength="1" d="M800 296C800 380 700 370 700 432V1190"/>
-<path class="th th2" pathLength="1" d="M960 296C960 380 1035 370 1035 432V1190"/>
-</g>
-<!-- nodes: c = chain (0 scroll, 1 mask, 2 colours), r = layer row -->
-<g class="ib-nodes">
-<g class="nd c0 r0" transform="translate(330 480)"><g class="nd-in"><circle r="46" class="md"/><g class="gl"><rect x="-24" y="-24" width="48" height="13" rx="2"/><rect x="-24" y="-6" width="48" height="13" rx="2" class="a"/><rect x="-24" y="12" width="48" height="13" rx="2"/></g></g><text x="62" y="-4" class="tt">Story order</text><text x="62" y="26" class="ts">set by performers</text></g>
-<g class="nd c1 r0" transform="translate(700 480)"><g class="nd-in"><circle r="46" class="md"/><g class="gl"><path d="M-28 0C-14-18 14-18 28 0C14 18-14 18-28 0Z" class="w"/><circle r="9" class="k"/></g></g><text x="62" y="-4" class="tt">Crowns &amp; eyes</text><text x="62" y="26" class="ts">a Nayaka-style link</text></g>
-<g class="nd c2 r0" transform="translate(1035 480)"><g class="nd-in"><circle r="46" class="md"/><g class="gl"><circle r="24" class="w"/><circle r="14" class="a"/><circle r="5" class="k"/></g></g><text x="62" y="-4" class="tt">Seen from afar</text><text x="62" y="26" class="ts">bold colour, large figures</text></g>
-<g class="nd c0 r1" transform="translate(330 830)"><g class="nd-in"><circle r="46" class="md"/><g class="gl"><path d="M-24-20H24V20H-24Z" class="w"/><path d="M-24-7H24M-24 7H24" class="ln"/></g></g><text x="62" y="-4" class="tt">Primed khadi</text><text x="62" y="26" class="ts">rice starch, clay, lac</text></g>
-<g class="nd c1 r1" transform="translate(700 830)"><g class="nd-in"><circle r="46" class="md"/><g class="gl"><ellipse rx="20" ry="27" class="w"/><ellipse rx="11" ry="16" class="a"/></g></g><text x="62" y="-4" class="tt">Tamarind shell</text><text x="62" y="26" class="ts">sawdust on a clay mould</text></g>
-<g class="nd c2 r1" transform="translate(1035 830)"><g class="nd-in"><circle r="46" class="md"/><g class="gl"><path d="M-28 8H28L20 24H-20Z" class="w"/><path d="M-6-28L14 4" class="ln"/><circle cx="-10" cy="2" r="6" class="a"/></g></g><text x="62" y="-4" class="tt">Hand-ground colour</text><text x="62" y="26" class="ts">tamarind &amp; lac binders</text></g>
-<g class="nd c0 r2" transform="translate(330 1190)"><g class="nd-in"><circle r="46" class="md"/><g class="gl"><path d="M0-20L-20 14H20Z" class="ln"/><circle cy="-20" r="8" class="a"/><circle cx="-20" cy="14" r="8" class="w"/><circle cx="20" cy="14" r="8" class="k"/></g></g><text x="62" y="-4" class="tt">Teller &amp; patron</text><text x="62" y="26" class="ts">hereditary rights</text></g>
-<g class="nd c1 r2" transform="translate(700 1190)"><g class="nd-in"><circle r="46" class="md"/><g class="gl"><path d="M-24 0L0-24L24 0V24H-24Z" class="w"/><path d="M-7 24V8H7V24" class="a"/></g></g><text x="62" y="-4" class="tt">Household</text><text x="62" y="26" class="ts">learning from parents</text></g>
-<g class="nd c2 r2" transform="translate(1035 1190)"><g class="nd-in"><circle r="46" class="md"/><g class="gl"><path d="M-22-8H18L10-18M22 8H-18L-10 18" class="ln"/></g></g><text x="62" y="-4" class="tt">Trade ties</text><text x="62" y="26" class="ts">powders from Rajasthan</text></g>
-</g>
-<!-- the visible tip -->
-<g class="ib-tip">
-<path d="M500 300 L560 214 L612 196 L664 124 L724 104 L790 34 L852 84 L904 72 L962 144 L1012 162 L1062 232 L1110 300 Z" fill="#f4f8fc" stroke="#0f0b09" stroke-width="8" stroke-linejoin="round"/>
-<path d="M664 124L700 210L612 196M790 34L800 150L724 104M800 150L700 210M904 72L880 170L800 150M880 170L1012 162M700 210L760 300M880 170L940 300" fill="none" stroke="#0f0b09" stroke-width="3" opacity=".18"/>
-<path d="M790 34L852 84L904 72L880 170L800 150Z" fill="#dbe8f4"/>
-</g>
-<g class="ib-objs">
-<g transform="translate(640 210)"><g class="ob o0">
-<rect x="-46" y="-78" width="92" height="150" fill="#c4281c" stroke="#0f0b09" stroke-width="5"/>
-<rect x="-46" y="-28" width="92" height="8" fill="#f4c35a" stroke="#0f0b09" stroke-width="2"/><rect x="-46" y="22" width="92" height="8" fill="#f4c35a" stroke="#0f0b09" stroke-width="2"/>
-<g fill="#f4ead8" stroke="#0f0b09" stroke-width="2.4"><circle cx="-22" cy="-56" r="7"/><path d="M-30-48h16v18h-16z" fill="#2b4fb8"/><circle cx="16" cy="-56" r="7"/><path d="M8-48h16v18h-16z" fill="#2e7d4a"/><circle cx="-6" cy="-6" r="7"/><path d="M-14 2h16v18h-16z" fill="#e0a226"/><circle cx="24" cy="-4" r="6"/><circle cx="-24" cy="44" r="7"/><path d="M-32 52h16v16h-16z" fill="#2b4fb8"/><circle cx="12" cy="44" r="7"/><path d="M4 52h16v16h-16z" fill="#f4ead8"/></g>
-<rect x="-56" y="-90" width="112" height="14" rx="7" fill="#7a4a24" stroke="#0f0b09" stroke-width="4"/><rect x="-56" y="70" width="112" height="14" rx="7" fill="#7a4a24" stroke="#0f0b09" stroke-width="4"/>
-</g></g>
-<g transform="translate(800 196)"><g class="ob o1">
-<path d="M-40-46L-30-92L-14-62L0-104L14-62L30-92L40-46Z" fill="#e0a226" stroke="#0f0b09" stroke-width="5" stroke-linejoin="round"/>
-<circle cx="0" cy="-74" r="6" fill="#c4281c" stroke="#0f0b09" stroke-width="2.5"/>
-<path d="M-46-46H46C50 10 34 66 0 84C-34 66-50 10-46-46Z" fill="#2b4fb8" stroke="#0f0b09" stroke-width="5" stroke-linejoin="round"/>
-<path d="M-34-12C-24-24-10-24-6-12C-14-4-26-4-34-12ZM34-12C24-24 10-24 6-12C14-4 26-4 34-12Z" fill="#f8f1e2" stroke="#0f0b09" stroke-width="3"/>
-<circle cx="-19" cy="-13" r="5" fill="#0f0b09"/><circle cx="19" cy="-13" r="5" fill="#0f0b09"/>
-<path d="M0-40V-22" stroke="#c4281c" stroke-width="6" stroke-linecap="round"/>
-<path d="M-16 44Q0 56 16 44" fill="#c4281c" stroke="#0f0b09" stroke-width="3"/>
-<path d="M-38-30C-26-38-12-36-6-30M38-30C26-38 12-36 6-30" fill="none" stroke="#0f0b09" stroke-width="3.5" stroke-linecap="round"/>
-</g></g>
-<g transform="translate(962 262)"><g class="ob o2">
-<g stroke="#0f0b09" stroke-width="4"><path d="M-74 0A20 20 0 0 0-34 0Z" fill="#c4281c"/><path d="M-40-22A20 20 0 0 0 0-22Z" fill="#e0a226"/><path d="M-6 0A20 20 0 0 0 34 0Z" fill="#2b4fb8"/><path d="M28-22A20 20 0 0 0 68-22Z" fill="#2e7d4a"/><path d="M40 6A16 16 0 0 0 72 6Z" fill="#f4ead8"/></g>
-<g stroke="#0f0b09" stroke-width="2"><ellipse cx="-54" cy="0" rx="20" ry="5" fill="#e04a33"/><ellipse cx="-20" cy="-22" rx="20" ry="5" fill="#f4c35a"/><ellipse cx="14" cy="0" rx="20" ry="5" fill="#4a6fd0"/><ellipse cx="48" cy="-22" rx="20" ry="5" fill="#4aa066"/></g>
-</g></g>
-<g class="ib-objlab" font-family="var(--f-mono)" text-anchor="middle"><text x="640" y="104">SCROLL</text><text x="800" y="76">MASK</text><text x="962" y="214">COLOURS</text></g>
-</g>
-<!-- waterline band -->
-<g class="ib-water"><g class="ib-wave"><rect x="-4000" y="290" width="9000" height="22" fill="url(#ib-scal)"/></g><rect x="-4000" y="286" width="9000" height="5" fill="#0f0b09"/></g>
-<text class="ib-wl" x="1340" y="276" text-anchor="end" font-family="var(--f-mono)">WATERLINE</text>
-<g class="ib-bub" fill="none" stroke="#f4ead8" stroke-width="2.5" opacity=".35"><circle cx="1520" cy="1100" r="7"/><circle cx="1545" cy="900" r="4"/><circle cx="110" cy="1320" r="6"/><circle cx="60" cy="1000" r="4"/></g>
-</svg>
+<section class="scene bg-indigo" id="s07" data-title="Cultural iceberg" data-kicker="Concept 6 · Cultural iceberg" data-speaker="6" data-steps="3" data-time="45">
+  <div class="stage">
+    <div class="s07-art" aria-hidden="true">
+      <svg viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet" focusable="false">
+        <defs>
+          <pattern id="s07-dots" width="44" height="44" patternUnits="userSpaceOnUse"><circle cx="22" cy="22" r="4.2" fill="#f4ead8"/></pattern>
+          <clipPath id="s07-bc"><path id="s07-bodyc" d="M250 600 L150 720 L100 880 L35 1060 L75 1240 L150 1400 L180 1590 L330 1715 L470 1810 L690 1695 L790 1545 L795 1400 L905 1235 L890 1040 L810 880 L830 720 L760 600 Z"/></clipPath>
+          <linearGradient id="s07-deep" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#142059" stop-opacity="0"/><stop offset="1" stop-color="#070d2e" stop-opacity=".85"/></linearGradient>
+        </defs>
 
-<div class="ib-cap" aria-live="polite">
-<div class="ib-frame" aria-hidden="true"></div>
-<div class="ib-c" data-k="0">
-<p class="label ib-k"><span class="ib-n">1/6</span>Above the waterline</p>
-<h1 class="h2 ib-h">What a buyer <em class="em-accent">sees</em></h1>
-<p class="lede">A scroll, a mask, a set of colours. Finished, framed and priced.</p>
-<p class="ib-q">The question for this scene: what holds them up?</p>
-</div>
-<div class="ib-c" data-k="1">
-<p class="label ib-k"><span class="ib-n">2/6</span>Below the waterline</p>
-<h2 class="h2 ib-h">What holds it <em class="em-accent">up</em></h2>
-<ul class="ib-legend">
-<li><b class="tg t0">Knowledge</b> What makers and performers know: stories, conventions, recipes.</li>
-<li><b class="tg t1">Skills</b> What hands can do: preparing, shaping, grinding, painting.</li>
-<li><b class="tg t2">Relationships</b> Who the work depends on: tellers, patrons, households, suppliers.</li>
-</ul>
-</div>
-<div class="ib-c" data-k="2">
-<p class="label ib-k"><span class="ib-n">3/6</span>Follow one object down · the scroll</p>
-<h2 class="h2 ib-h">A scroll is a <em class="em-accent">commission</em> between people</h2>
-<ol class="ib-rows">
-<li><b class="tg t0">K</b><p>Performers set the story's order and iconography; painters shape materials and style. <button class="src" data-cite="Da Fonseca, 2019, Manuscript Studies 4(1): five Padmasali Purana scrolls, c.1625 to 2000. Performers determined narrative organisation and iconographic requirements; painters shaped materials, technique and style." data-url="https://doi.org/10.1353/mns.2019.0002">Da Fonseca 2019</button></p></li>
-<li><b class="tg t1">S</b><p>Khadi cloth is primed with rice starch, white clay, boiled tamarind seed and lac. <button class="src" data-cite="Dastkari Haat Samiti, Cherial Scroll Painting, Google Arts and Culture: khadi canvas treated with three coats of rice starch, white clay, boiled tamarind seed and lac." data-url="https://artsandculture.google.com/story/GwUBPP7T1GHIKA">Dastkari Haat</button></p></li>
-<li><b class="tg t2">R</b><p>Hereditary performing rights tie a storyteller to a patron community. <button class="src" data-cite="Charsley, 2004: hereditary performing rights (mirasi) and storyteller-patron pairings" data-url="https://asianethnology.org/article/507/download">Charsley 2004</button></p></li>
-</ol>
-</div>
-<div class="ib-c" data-k="3">
-<p class="label ib-k"><span class="ib-n">4/6</span>Follow one object down · the mask</p>
-<h2 class="h2 ib-h">A mask carries a <em class="em-accent">household's</em> method</h2>
-<ol class="ib-rows">
-<li><b class="tg t0">K</b><p>The towering crowns and large eyes follow a visual convention one collector links to Nayaka painting, c.1540. <button class="src" data-cite="Style link to Nayaka painting of about 1540 (similar eyes, towering jewelled crowns, costume), per collector Jagdish Mittal as reviewed at SOAS. A style link, not proof of patronage." data-url="https://www.SOAS.ac.uk/sites/default/files/2022-06/08%20Book%20review%20Deccani%20Scroll%20Paintings%20in%20the%20Jagdish%20and%20Kamla%20Mittal%20Museum%20of%20Indian%20Art%20file102880.pdf">Mittal, via SOAS</button></p></li>
-<li><b class="tg t1">S</b><p>Sawdust and tamarind paste over a clay mould, then cotton, rice starch, white clay and tree lac. <button class="src" data-cite="Dastkari Haat Samiti, Colourful Masks from Cherial, Google Arts and Culture. Documented for D. Vaikuntam and family, not a universal specification." data-url="https://artsandculture.google.com/story/tAXRuSD-UCc-Iw">Dastkari Haat</button></p></li>
-<li><b class="tg t2">R</b><p>Skill passes through households: one artist learned from his parents, and GI listing ran through kin and apprentices. <button class="src" data-cite="Das, 2018, Scroll.in: an artist learning from his parents." data-url="https://scroll.in/magazine/869992/scroll_in">Das 2018</button> <button class="src" data-cite="Bose, 2021, Contemporary South Asia 29(1): identifying GI authorised users involved kin relations, including apprentices understood through kinship." data-url="https://doi.org/10.1080/09584935.2021.1884656">Bose 2021</button></p></li>
-</ol>
-</div>
-<div class="ib-c" data-k="4">
-<p class="label ib-k"><span class="ib-n">5/6</span>Follow one object down · the colours</p>
-<h2 class="h2 ib-h">Colour is <em class="em-accent">labour</em> you cannot see</h2>
-<ol class="ib-rows">
-<li><b class="tg t0">K</b><p>Bold colour, simple drawing and large figures were suited to being seen outdoors, from a distance. <button class="src" data-cite="University of Michigan Museum of Art, object 1980/2.304: late eighteenth-century fragment; catalogue describes bold colours, simplified drawing and large scale suitable for outdoor viewing at a distance." data-url="https://umma.umich.edu/objects/markendeya-purana-series-bhavana-on-tiger-confronts-a-demon-rama-and-hanuman-1980-2-304/">UMMA</button></p></li>
-<li><b class="tg t1">S</b><p>Mineral pigments ground by hand, bound with tamarind and lac. <button class="src" data-cite="Dastkari Haat Samiti, How to Make Coloured Paint, Google Arts and Culture: hand-ground mineral pigments, tamarind and lac binders, and purchased colour powders." data-url="https://artsandculture.google.com/story/tQURV9zwLC5eKg">Dastkari Haat</button></p></li>
-<li><b class="tg t2">R</b><p>Some colour powders are bought in from Rajasthan, so supply is a relationship too. <button class="src" data-cite="The News Minute, 2018: colour powders bought from Rajasthan" data-url="https://www.thenewsminute.com/article/scrolls-masks-how-telanganas-400-yr-old-cheriyal-paintings-have-evolved-87843">News Minute 2018</button></p></li>
-</ol>
-</div>
-<div class="ib-c" data-k="5">
-<p class="label ib-k"><span class="ib-n">6/6</span>The whole picture</p>
-<h2 class="h2 ib-h">The surface moves. The <em class="em-accent">base</em> stays.</h2>
-<blockquote class="ib-quote">&ldquo;The medium might change, but the creative process and the use of natural colours remain the same.&rdquo; <button class="src" data-cite="Hans India, 2025: Sai Kiran Dhanalakota" data-url="https://www.thehansindia.com/news/cities/hyderabad/reviving-tradition-the-contemporary-touch-to-cheriyal-art-944310">Hans India 2025</button></blockquote>
-<dl class="ib-ev">
-<div><dt>Evidence</dt><dd>Each of the nine points below the line is sourced.</dd></div>
-<div><dt>Our reading</dt><dd>The iceberg, the three layers and the links between them are our framing. No source uses an iceberg.</dd></div>
-<div><dt>Untested</dt><dd>Whether buyers value what sits below the line.</dd></div>
-</dl>
-</div>
-</div>
-</div>
-<template class="notes"><li>Start on the surface: scroll, mask, colours</li><li>Drop below: knowledge, skills, relationships</li><li>Scroll: performers set order; primed khadi; teller and patron</li><li>Mask: Nayaka-style link; tamarind shell; household and apprentices</li><li>Colours: seen from afar; hand-ground; powders from Rajasthan</li><li>Overview: facts sourced, iceberg is our framing; buyer value untested</li></template>
+        <!-- ground: sky and deep water -->
+        <rect x="-6000" y="-600" width="13000" height="1200" fill="#1f2f6e"/>
+        <rect x="-6000" y="-600" width="13000" height="1200" fill="url(#s07-dots)" opacity=".07"/>
+        <rect x="-6000" y="600" width="13000" height="2400" fill="#142059"/>
+        <rect x="-6000" y="600" width="13000" height="2400" fill="url(#s07-dots)" opacity=".1"/>
+
+        <!-- painted sun and stars -->
+        <g class="intro" data-r="0.1,0.9" transform="translate(745 215)">
+          <g stroke="#0f0b09" stroke-width="5" stroke-linejoin="round" fill="#e0a226" class="fl dr">
+            <path pathLength="1" d="M0 -92 L12 -62 L-12 -62 Z M64 -66 L52 -34 L36 -52 Z M92 0 L62 12 L62 -12 Z M64 66 L36 52 L52 34 Z M0 92 L-12 62 L12 62 Z M-64 66 L-52 34 L-36 52 Z M-92 0 L-62 -12 L-62 12 Z M-64 -66 L-36 -52 L-52 -34 Z"/>
+          </g>
+          <circle class="dr fl" pathLength="1" r="50" fill="#e0a226" stroke="#0f0b09" stroke-width="6"/>
+          <circle class="dr fl" pathLength="1" r="26" fill="#c4281c" stroke="#0f0b09" stroke-width="5"/>
+        </g>
+        <g class="intro dt" data-r="0.4,1" fill="#f4ead8">
+          <circle cx="820" cy="150" r="6"/><circle cx="880" cy="230" r="4"/><circle cx="740" cy="200" r="4"/><circle cx="930" cy="120" r="4"/><circle cx="60" cy="130" r="4"/><circle cx="330" cy="170" r="4"/><circle cx="640" cy="130" r="5"/>
+        </g>
+
+        <!-- bathymetry: deep water darkens with depth -->
+        <rect x="-6000" y="600" width="13000" height="1500" fill="url(#s07-deep)"/>
+        <!-- light rays from the surface -->
+        <g class="intro dt" data-r="0.3,1" fill="#f4ead8" opacity=".5"><path opacity="0.07" d="M-260 600 L-214 600 L-292 1750 L-439 1750 Z"/><path opacity="0.06" d="M-60 600 L10 600 L30 1750 L-194 1750 Z"/><path opacity="0.05" d="M150 600 L184 600 L212 1750 L103 1750 Z"/><path opacity="0.05" d="M330 600 L390 600 L510 1750 L318 1750 Z"/><path opacity="0.05" d="M560 600 L600 600 L740 1750 L612 1750 Z"/><path opacity="0.06" d="M740 600 L812 600 L1096 1750 L865 1750 Z"/><path opacity="0.07" d="M960 600 L1012 600 L1316 1750 L1149 1750 Z"/><path opacity="0.05" d="M1150 600 L1190 600 L1530 1750 L1402 1750 Z"/></g>
+        <!-- the whole mass, always faintly present -->
+        <g class="intro" data-r="0.2,1">
+          <path class="dr fl" pathLength="1" d="M250 600 L150 720 L100 880 L35 1060 L75 1240 L150 1400 L180 1590 L330 1715 L470 1810 L690 1695 L790 1545 L795 1400 L905 1235 L890 1040 L810 880 L830 720 L760 600 Z" fill="#2c4192" stroke="#0f0b09" stroke-width="9" stroke-linejoin="round" data-fo=".55"/>
+        </g>
+        <!-- faceted submerged body: four tones of ice, revealed band by band -->
+        <g clip-path="url(#s07-bc)">
+                  <g class="strat" data-r="0.1,0.7" stroke="#0f0b09" stroke-width="5" stroke-linejoin="round">
+                    <path class="fl pl" d="M250 600 L434 600 L384 700 L150 720 Z" fill="#e9f3fc"/>
+                    <path class="fl pl" d="M434 600 L597 600 L621 696 Z" fill="#e5f1fb"/>
+                    <path class="fl pl" d="M434 600 L621 696 L384 700 Z" fill="#cddceb"/>
+                    <path class="fl pl" d="M597 600 L760 600 L830 720 Z" fill="#d4e2ef"/>
+                    <path class="fl pl" d="M597 600 L830 720 L621 696 Z" fill="#a0aec3"/>
+                    <path class="fl pl" d="M150 720 L384 700 L358 872 L100 880 Z" fill="#deecf9"/>
+                    <path class="fl pl" d="M384 700 L621 696 L556 880 Z" fill="#daeaf8"/>
+                    <path class="fl pl" d="M384 700 L556 880 L358 872 Z" fill="#cee2f6"/>
+                    <path class="fl pl" d="M621 696 L830 720 L810 880 L556 880 Z" fill="#b2c4da"/>
+                  </g>
+                  <g class="strat" data-r="0.3,1.0" stroke="#0f0b09" stroke-width="5" stroke-linejoin="round">
+                    <path class="fl pl" d="M100 880 L358 872 L315 1049 L35 1060 Z" fill="#c9ddf3"/>
+                    <path class="fl pl" d="M358 872 L556 880 L591 1023 L315 1049 Z" fill="#bad4f0"/>
+                    <path class="fl pl" d="M556 880 L810 880 L890 1040 Z" fill="#a9c1dd"/>
+                    <path class="fl pl" d="M556 880 L890 1040 L591 1023 Z" fill="#8399ba"/>
+                  </g>
+                  <g class="strat" data-r="1.0,1.7" stroke="#0f0b09" stroke-width="5" stroke-linejoin="round">
+                    <path class="fl pl" d="M35 1060 L315 1049 L369 1257 Z" fill="#c2d6ef"/>
+                    <path class="fl pl" d="M35 1060 L369 1257 L75 1240 Z" fill="#adc7e9"/>
+                    <path class="fl pl" d="M315 1049 L591 1023 L617 1221 L369 1257 Z" fill="#a4c1e7"/>
+                    <path class="fl pl" d="M591 1023 L890 1040 L905 1235 Z" fill="#87a4cb"/>
+                    <path class="fl pl" d="M591 1023 L905 1235 L617 1221 Z" fill="#657faa"/>
+                    <path class="fl pl" d="M75 1240 L369 1257 L390 1425 Z" fill="#aec5e6"/>
+                    <path class="fl pl" d="M75 1240 L390 1425 L150 1400 Z" fill="#97b4de"/>
+                    <path class="fl pl" d="M369 1257 L617 1221 L593 1394 L390 1425 Z" fill="#799fd6"/>
+                    <path class="fl pl" d="M617 1221 L905 1235 L593 1394 Z" fill="#6c8dc0"/>
+                    <path class="fl pl" d="M905 1235 L795 1400 L593 1394 Z" fill="#5674a8"/>
+                  </g>
+                  <g class="strat" data-r="1.3,1.95" stroke="#0f0b09" stroke-width="5" stroke-linejoin="round">
+                    <path class="fl pl" d="M150 1400 L390 1425 L428 1548 Z" fill="#a7bde1"/>
+                    <path class="fl pl" d="M150 1400 L428 1548 L180 1590 Z" fill="#7b9cd1"/>
+                    <path class="fl pl" d="M390 1425 L593 1394 L616 1548 L428 1548 Z" fill="#6f94ce"/>
+                    <path class="fl pl" d="M593 1394 L795 1400 L790 1545 Z" fill="#597ebb"/>
+                    <path class="fl pl" d="M593 1394 L790 1545 L616 1548 Z" fill="#3f5e97"/>
+                    <path class="fl pl" d="M180 1590 L428 1548 L438 1686 Z" fill="#9cb1d7"/>
+                    <path class="fl pl" d="M180 1590 L438 1686 L330 1715 Z" fill="#6e8bc1"/>
+                    <path class="fl pl" d="M428 1548 L616 1548 L438 1686 Z" fill="#698ac4"/>
+                    <path class="fl pl" d="M616 1548 L563 1719 L438 1686 Z" fill="#4366a9"/>
+                    <path class="fl pl" d="M616 1548 L790 1545 L563 1719 Z" fill="#4a6eb1"/>
+                    <path class="fl pl" d="M790 1545 L690 1695 L563 1719 Z" fill="#334f8a"/>
+                    <path class="fl pl" d="M330 1715 L438 1686 L470 1810 Z" fill="#7890c2"/>
+                    <path class="fl pl" d="M438 1686 L563 1719 L470 1810 Z" fill="#4a6aac"/>
+                    <path class="fl pl" d="M563 1719 L690 1695 L470 1810 Z" fill="#335191"/>
+                  </g>
+                  <g class="dt" data-r="0.2,1.9" fill="none" stroke="#f4ead8" stroke-width="9" stroke-linecap="round" stroke-dasharray="0.1 28">
+            <path d="M434 600 L384 700 L358 872 L315 1049 L369 1257 L390 1425 L428 1548 L438 1686 L470 1810"/>
+            <path d="M250 600 L150 720 L100 880 L35 1060 L75 1240 L150 1400 L180 1590 L330 1715 L470 1810 L690 1695 L790 1545 L795 1400 L905 1235 L890 1040 L810 880 L830 720 L760 600 Z" transform="translate(500 1200) scale(.93 .955) translate(-500 -1200)"/>
+          </g>
+                  <path class="dt" data-r="0.2,1.9" d="M424 717 L590 714 M398 735 L519 861 M72 1097 L306 1235 M362 1075 L555 1057 M135 1260 L341 1272 M405 1277 L579 1251" fill="none" stroke="#fbf7ee" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+                </g>
+        
+        <!-- body outline on top -->
+        <path class="bodyline dr" pathLength="1" data-r="0.2,1" d="M250 600 L150 720 L100 880 L35 1060 L75 1240 L150 1400 L180 1590 L330 1715 L470 1810 L690 1695 L790 1545 L795 1400 L905 1235 L890 1040 L810 880 L830 720 L760 600 Z" fill="none" stroke="#0f0b09" stroke-width="10" stroke-linejoin="round"/>
+        
+        <!-- painted fish and water motifs around the submerged mass -->
+                <g class="dt" data-r="0.15,0.9">
+          <g transform="translate(-90 690) rotate(-6) scale(1.10 1.10)" stroke="#0f0b09" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M-26 0 L-54 -18 L-46 0 L-54 18 Z" fill="#c4281c"/>
+            <path d="M-30 0 Q-4 -24 24 -9 Q38 0 24 9 Q-4 24 -30 0 Z" fill="#e0a226"/>
+            <path d="M-8 -17 Q0 -30 12 -14" fill="#c4281c"/>
+            <path d="M-10 -12 Q-4 0 -10 12 M2 -15 Q8 0 2 15" fill="none"/>
+            <circle cx="20" cy="-3" r="3.2" fill="#0f0b09" stroke="none"/>
+          </g>
+          <g transform="translate(-30 760) rotate(4) scale(0.70 0.70)" stroke="#0f0b09" stroke-width="5.7" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M-26 0 L-54 -18 L-46 0 L-54 18 Z" fill="#2b4fb8"/>
+            <path d="M-30 0 Q-4 -24 24 -9 Q38 0 24 9 Q-4 24 -30 0 Z" fill="#f4ead8"/>
+            <path d="M-8 -17 Q0 -30 12 -14" fill="#2b4fb8"/>
+            <path d="M-10 -12 Q-4 0 -10 12 M2 -15 Q8 0 2 15" fill="none"/>
+            <circle cx="20" cy="-3" r="3.2" fill="#0f0b09" stroke="none"/>
+          </g>
+          <path d="M0 0 a14 12 0 0 0 28 0 M32 0 a14 12 0 0 0 28 0 M64 0 a14 12 0 0 0 28 0" transform="translate(-190 1110) scale(1.00)" fill="none" stroke="#7fa2e6" stroke-width="5" stroke-linecap="round"/>
+          <path d="M0 0 a14 12 0 0 0 28 0 M32 0 a14 12 0 0 0 28 0" transform="translate(-150 1150) scale(1.00)" fill="none" stroke="#7fa2e6" stroke-width="5" stroke-linecap="round"/>
+        </g>
+                <g class="dt" data-r="0.5,1.2">
+          <g transform="translate(1000 1020) rotate(5) scale(-1.00 1.00)" stroke="#0f0b09" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M-26 0 L-54 -18 L-46 0 L-54 18 Z" fill="#e0a226"/>
+            <path d="M-30 0 Q-4 -24 24 -9 Q38 0 24 9 Q-4 24 -30 0 Z" fill="#c4281c"/>
+            <path d="M-8 -17 Q0 -30 12 -14" fill="#e0a226"/>
+            <path d="M-10 -12 Q-4 0 -10 12 M2 -15 Q8 0 2 15" fill="none"/>
+            <circle cx="20" cy="-3" r="3.2" fill="#0f0b09" stroke="none"/>
+          </g>
+          <g transform="translate(1030 1100) rotate(-4) scale(-0.65 0.65)" stroke="#0f0b09" stroke-width="6.2" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M-26 0 L-54 -18 L-46 0 L-54 18 Z" fill="#e0a226"/>
+            <path d="M-30 0 Q-4 -24 24 -9 Q38 0 24 9 Q-4 24 -30 0 Z" fill="#f4ead8"/>
+            <path d="M-8 -17 Q0 -30 12 -14" fill="#e0a226"/>
+            <path d="M-10 -12 Q-4 0 -10 12 M2 -15 Q8 0 2 15" fill="none"/>
+            <circle cx="20" cy="-3" r="3.2" fill="#0f0b09" stroke="none"/>
+          </g>
+          <path d="M0 0 a14 12 0 0 0 28 0 M32 0 a14 12 0 0 0 28 0 M64 0 a14 12 0 0 0 28 0" transform="translate(960 1200) scale(1.00)" fill="none" stroke="#7fa2e6" stroke-width="5" stroke-linecap="round"/>
+          <path d="M0 0 a14 12 0 0 0 28 0 M32 0 a14 12 0 0 0 28 0" transform="translate(1010 1240) scale(1.00)" fill="none" stroke="#7fa2e6" stroke-width="5" stroke-linecap="round"/>
+        </g>
+                <g class="dt" data-r="1.0,1.7">
+          <g transform="translate(-110 1610) rotate(-8) scale(1.20 1.20)" stroke="#0f0b09" stroke-width="3.3" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M-26 0 L-54 -18 L-46 0 L-54 18 Z" fill="#c4281c"/>
+            <path d="M-30 0 Q-4 -24 24 -9 Q38 0 24 9 Q-4 24 -30 0 Z" fill="#f4ead8"/>
+            <path d="M-8 -17 Q0 -30 12 -14" fill="#c4281c"/>
+            <path d="M-10 -12 Q-4 0 -10 12 M2 -15 Q8 0 2 15" fill="none"/>
+            <circle cx="20" cy="-3" r="3.2" fill="#0f0b09" stroke="none"/>
+          </g>
+          <g transform="translate(-20 1680) rotate(6) scale(0.80 0.80)" stroke="#0f0b09" stroke-width="5.0" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M-26 0 L-54 -18 L-46 0 L-54 18 Z" fill="#2b4fb8"/>
+            <path d="M-30 0 Q-4 -24 24 -9 Q38 0 24 9 Q-4 24 -30 0 Z" fill="#e0a226"/>
+            <path d="M-8 -17 Q0 -30 12 -14" fill="#2b4fb8"/>
+            <path d="M-10 -12 Q-4 0 -10 12 M2 -15 Q8 0 2 15" fill="none"/>
+            <circle cx="20" cy="-3" r="3.2" fill="#0f0b09" stroke="none"/>
+          </g>
+          <path d="M0 0 a14 12 0 0 0 28 0 M32 0 a14 12 0 0 0 28 0 M64 0 a14 12 0 0 0 28 0" transform="translate(-180 1500) scale(1.00)" fill="none" stroke="#7fa2e6" stroke-width="5" stroke-linecap="round"/>
+          <path d="M0 0 a14 12 0 0 0 28 0 M32 0 a14 12 0 0 0 28 0" transform="translate(-140 1540) scale(1.00)" fill="none" stroke="#7fa2e6" stroke-width="5" stroke-linecap="round"/>
+        </g>
+                <g class="dt" data-r="1.3,1.95">
+          <g transform="translate(990 1470) rotate(4) scale(-1.15 1.15)" stroke="#0f0b09" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M-26 0 L-54 -18 L-46 0 L-54 18 Z" fill="#2e7d4a"/>
+            <path d="M-30 0 Q-4 -24 24 -9 Q38 0 24 9 Q-4 24 -30 0 Z" fill="#e0a226"/>
+            <path d="M-8 -17 Q0 -30 12 -14" fill="#2e7d4a"/>
+            <path d="M-10 -12 Q-4 0 -10 12 M2 -15 Q8 0 2 15" fill="none"/>
+            <circle cx="20" cy="-3" r="3.2" fill="#0f0b09" stroke="none"/>
+          </g>
+          <g transform="translate(940 1580) rotate(-6) scale(-0.75 0.75)" stroke="#0f0b09" stroke-width="5.3" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M-26 0 L-54 -18 L-46 0 L-54 18 Z" fill="#c4281c"/>
+            <path d="M-30 0 Q-4 -24 24 -9 Q38 0 24 9 Q-4 24 -30 0 Z" fill="#f4ead8"/>
+            <path d="M-8 -17 Q0 -30 12 -14" fill="#c4281c"/>
+            <path d="M-10 -12 Q-4 0 -10 12 M2 -15 Q8 0 2 15" fill="none"/>
+            <circle cx="20" cy="-3" r="3.2" fill="#0f0b09" stroke="none"/>
+          </g>
+          <path d="M0 0 a14 12 0 0 0 28 0 M32 0 a14 12 0 0 0 28 0 M64 0 a14 12 0 0 0 28 0" transform="translate(1000 1650) scale(1.00)" fill="none" stroke="#7fa2e6" stroke-width="5" stroke-linecap="round"/>
+          <g transform="translate(10 1760) rotate(10) scale(0.90 0.90)" stroke="#0f0b09" stroke-width="4.4" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M-26 0 L-54 -18 L-46 0 L-54 18 Z" fill="#f4ead8"/>
+            <path d="M-30 0 Q-4 -24 24 -9 Q38 0 24 9 Q-4 24 -30 0 Z" fill="#c4281c"/>
+            <path d="M-8 -17 Q0 -30 12 -14" fill="#f4ead8"/>
+            <path d="M-10 -12 Q-4 0 -10 12 M2 -15 Q8 0 2 15" fill="none"/>
+            <circle cx="20" cy="-3" r="3.2" fill="#0f0b09" stroke="none"/>
+          </g>
+          <path d="M0 0 a14 12 0 0 0 28 0 M32 0 a14 12 0 0 0 28 0" transform="translate(-120 1790) scale(1.00)" fill="none" stroke="#7fa2e6" stroke-width="5" stroke-linecap="round"/>
+        </g>
+        
+        <!-- values: medallion + label pairs at different depths, zigzagging down the mass -->
+        
+        <g class="strat" data-r="0.25,0.8" transform="translate(330 790)">
+          <circle class="dr fl" pathLength="1" r="62" fill="#f4ead8" stroke="#0f0b09" stroke-width="6"/>
+          <g stroke="#0f0b09" stroke-width="5" stroke-linejoin="round" class="dt">
+            <path d="M-32 20 L-36 -16 L-17 2 L0 -28 L17 2 L36 -16 L32 20 Z" fill="#e0a226"/>
+            <rect x="-34" y="20" width="68" height="13" fill="#c4281c"/>
+            <circle cx="-36" cy="-18" r="5" fill="#f4ead8" stroke-width="3"/><circle cx="0" cy="-31" r="5" fill="#f4ead8" stroke-width="3"/><circle cx="36" cy="-18" r="5" fill="#f4ead8" stroke-width="3"/>
+          </g>
+        </g>
+        <g class="strat lab" data-r="0.35,0.85" transform="translate(425 760)">
+          <rect class="fl pl" x="0" y="0" width="330" height="62" rx="12" fill="#f4ead8" stroke="#0f0b09" stroke-width="5"/>
+          <text class="dt" x="165" y="42" text-anchor="middle" textLength="284" lengthAdjust="spacingAndGlyphs">COMMUNITY PRIDE</text>
+        </g>
+        
+        <g class="strat" data-r="0.4,0.95" transform="translate(680 1040)">
+          <circle class="dr fl" pathLength="1" r="62" fill="#f4ead8" stroke="#0f0b09" stroke-width="6"/>
+          <g stroke="#0f0b09" stroke-width="5" stroke-linejoin="round" class="dt">
+            <path d="M0 -36 Q17 -8 0 26 Q-17 -8 0 -36 Z" fill="#eda283"/>
+            <path d="M0 26 Q-6 -2 -34 -14 Q-36 14 0 26 Z" fill="#f4ead8"/>
+            <path d="M0 26 Q6 -2 34 -14 Q36 14 0 26 Z" fill="#f4ead8"/>
+            <path d="M-38 30 Q0 40 38 30" fill="none" stroke-linecap="round"/>
+          </g>
+        </g>
+        <g class="strat lab" data-r="0.5,1" transform="translate(262 1010)">
+          <rect class="fl pl" x="0" y="0" width="330" height="62" rx="12" fill="#f4ead8" stroke="#0f0b09" stroke-width="5"/>
+          <text class="dt" x="165" y="42" text-anchor="middle">DEVOTION</text>
+        </g>
+        
+        <g class="strat" data-r="1.15,1.8" transform="translate(320 1310)">
+          <circle class="dr fl" pathLength="1" r="62" fill="#f4ead8" stroke="#0f0b09" stroke-width="6"/>
+          <g stroke="#0f0b09" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" class="dt">
+            <path d="M-38 14 Q-20 -14 0 8 T38 -8" fill="none" stroke-width="7"/>
+            <path d="M22 -34 L40 -16 L20 4 L10 -6 Z" fill="#e0a226"/>
+            <path d="M10 -6 L20 4 L36 18 Z" fill="#c4281c" stroke-width="4"/>
+          </g>
+        </g>
+        <g class="strat lab" data-r="1.3,1.9" transform="translate(415 1280)">
+          <rect class="fl pl" x="0" y="0" width="330" height="62" rx="12" fill="#e0a226" stroke="#0f0b09" stroke-width="5"/>
+          <text class="dt" x="165" y="42" text-anchor="middle">CRAFT ETHIC</text>
+        </g>
+        
+        <g class="strat" data-r="1.35,1.95" transform="translate(640 1540)">
+          <circle class="dr fl" pathLength="1" r="62" fill="#f4ead8" stroke="#0f0b09" stroke-width="6"/>
+          <g stroke="#0f0b09" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" class="dt">
+            <path d="M-6 34 L-8 4 L8 4 L6 34 Z" fill="#8f1a12"/>
+            <circle cx="0" cy="-12" r="24" fill="#2e7d4a"/><circle cx="-20" cy="2" r="15" fill="#2e7d4a"/><circle cx="20" cy="2" r="15" fill="#2e7d4a"/>
+            <path d="M-6 34 L-22 44 M6 34 L22 44 M0 34 L0 48" fill="none" stroke-width="4"/>
+          </g>
+        </g>
+        <g class="strat lab" data-r="1.5,2" transform="translate(300 1510)">
+          <rect class="fl pl" x="0" y="0" width="300" height="62" rx="12" fill="#e0a226" stroke="#0f0b09" stroke-width="5"/>
+          <text class="dt" x="150" y="42" text-anchor="middle" textLength="240" lengthAdjust="spacingAndGlyphs">TREE CONSENT</text>
+        </g>
+        
+        <!-- the visible tip: jagged peak -->
+        <g class="intro" data-r="0.15,0.85">
+          <clipPath id="s07-tc"><path d="M250 600 L305 548 L285 470 L355 432 L372 360 L428 332 L452 246 L510 176 L545 256 L600 300 L618 380 L692 420 L682 502 L748 556 L760 600 Z"/></clipPath>
+          <g clip-path="url(#s07-tc)" stroke="#0f0b09" stroke-width="5" stroke-linejoin="round">
+            <path class="fl pl" d="M250 600 L305 548 L285 470 L400 470 L430 600 Z" fill="#fbf7ee"/>
+            <path class="fl pl" d="M285 470 L355 432 L372 360 L428 332 L430 470 L400 470 Z" fill="#ffffff"/>
+            <path class="fl pl" d="M372 360 L428 332 L452 246 L510 176 L470 330 L430 470 L428 332 Z" fill="#f1f8fe"/>
+            <path class="fl pl" d="M510 176 L545 256 L520 380 L470 330 Z" fill="#dcebf8"/>
+            <path class="fl pl" d="M545 256 L600 300 L618 380 L560 470 L520 380 Z" fill="#c3dbf3"/>
+            <path class="fl pl" d="M430 470 L470 330 L520 380 L560 470 L565 600 L430 600 Z" fill="#e6f2fc"/>
+            <path class="fl pl" d="M618 380 L692 420 L682 502 L620 520 L560 470 Z" fill="#a5c6ea"/>
+            <path class="fl pl" d="M560 470 L620 520 L682 502 L748 556 L760 600 L565 600 Z" fill="#8db1e0"/>
+            <path class="fl pl" d="M400 470 L430 470 L430 600 L305 600 L305 548 Z" fill="#d5e6f7"/>
+          </g>
+                  <path class="dr" pathLength="1" d="M250 600 L305 548 L285 470 L355 432 L372 360 L428 332 L452 246 L510 176 L545 256 L600 300 L618 380 L692 420 L682 502 L748 556 L760 600 Z" fill="none" stroke="#0f0b09" stroke-width="10" stroke-linejoin="round"/>
+          <path class="dt" d="M395 395 L412 372 M440 290 L452 268 M470 214 L486 196 M590 330 L602 352" stroke="#fbf7ee" stroke-width="6" stroke-linecap="round" fill="none"/>
+        </g>
+        <g class="intro dt" data-r="0.45,0.95" fill="#f4ead8" stroke="#0f0b09" stroke-width="0">
+          <circle cx="470" cy="330" r="5"/><circle cx="492" cy="272" r="5"/><circle cx="512" cy="228" r="5"/><circle cx="540" cy="305" r="5"/><circle cx="520" cy="380" r="5"/><circle cx="445" cy="398" r="5"/><circle cx="560" cy="430" r="5"/>
+        </g>
+
+
+        <g id="s07-tipfade">
+        <!-- icons above the line -->
+        <g class="intro" data-r="0.4,1">
+          <!-- mask -->
+          <g transform="translate(500 468)">
+            <ellipse class="dr fl" pathLength="1" rx="46" ry="58" fill="#c4281c" stroke="#0f0b09" stroke-width="6"/>
+            <g class="dt" stroke="#0f0b09" stroke-linejoin="round">
+              <path d="M-36 -28 L-20 -52 L0 -36 L20 -52 L36 -28 Z" fill="#e0a226" stroke-width="5"/>
+              <path d="M-32 -6 Q-17 -22 -3 -6 Q-17 8 -32 -6 Z M32 -6 Q17 -22 3 -6 Q17 8 32 -6 Z" fill="#f4ead8" stroke-width="4"/>
+              <circle cx="-17" cy="-7" r="5" fill="#0f0b09"/><circle cx="17" cy="-7" r="5" fill="#0f0b09"/>
+              <path d="M-4 6 L0 22 L4 6" fill="none" stroke-width="4" stroke-linecap="round"/>
+              <path d="M-14 34 Q0 44 14 34" fill="none" stroke-width="5" stroke-linecap="round"/>
+            </g>
+          </g>
+          <!-- scroll -->
+          <g transform="translate(382 516)">
+            <rect class="dr fl" pathLength="1" x="-44" y="-20" width="88" height="40" fill="#e0a226" stroke="#0f0b09" stroke-width="5"/>
+            <circle class="dr fl" pathLength="1" cx="-44" cy="0" r="17" fill="#e0a226" stroke="#0f0b09" stroke-width="5"/>
+            <circle class="dr fl" pathLength="1" cx="44" cy="0" r="17" fill="#e0a226" stroke="#0f0b09" stroke-width="5"/>
+            <g class="dt" fill="#c4281c" stroke="#0f0b09" stroke-width="3"><circle cx="-14" cy="0" r="7"/><circle cx="8" cy="0" r="7" fill="#2b4fb8"/><circle cx="28" cy="0" r="5" fill="#2e7d4a"/></g>
+          </g>
+          <!-- colours -->
+          <g transform="translate(618 514)" stroke="#0f0b09" stroke-width="5">
+            <circle class="dr fl" pathLength="1" cx="-30" cy="-12" r="17" fill="#2b4fb8"/>
+            <circle class="dr fl" pathLength="1" cx="6" cy="-18" r="17" fill="#2e7d4a"/>
+            <circle class="dr fl" pathLength="1" cx="38" cy="-4" r="17" fill="#e0a226"/>
+            <circle class="dr fl" pathLength="1" cx="-6" cy="18" r="17" fill="#c4281c"/>
+            <circle class="dr fl" pathLength="1" cx="28" cy="26" r="13" fill="#f4ead8"/>
+          </g>
+        </g>
+        <g class="intro dt tiplab" data-r="0.7,1">
+          <text x="382" y="586" text-anchor="middle">SCROLL</text><text x="500" y="586" text-anchor="middle">MASK</text><text x="618" y="586" text-anchor="middle">COLOURS</text>
+        </g>
+
+        </g>
+        <!-- painted waterline: static scalloped Cheriyal border (built in scene.js) -->
+        <g class="intro" data-r="0.3,1"><g id="s07-wave" class="dt"></g></g>
+      </svg>
+    </div>
+
+    <div class="s07-cap">
+      <div class="cap cap-0">
+        <p class="label">Above the waterline</p>
+        <h1 class="h1">The visible <em class="em-accent">tip</em></h1>
+        <p class="lede">The mask, the scroll and the colours are what people see first.</p>
+        <p class="mono s07-note">Our diagram, not a source's. No source frames the craft as an iceberg.</p>
+      </div>
+      <div class="cap cap-1">
+        <p class="label">Below the waterline · values</p>
+        <h2 class="h2">Pride and <em class="em-accent">devotion</em></h2>
+        <div class="s07-items">
+          <p class="body"><strong>Community pride.</strong> &ldquo;A matter of pride and identity.&rdquo; <button class="src" data-cite="The Print, 2021: craft as a livelihood, but also a matter of pride and identity" data-url="https://theprint.in/india/this-ancient-telangana-folk-artform-was-struggling-to-survive-then-covid-pushed-it-to-edge/520222">The Print</button></p>
+          <p class="body"><strong>Devotion.</strong> Damaged dolls receive funeral rites and water immersion. <button class="src" data-cite="Indica Changemakers: the tree that must consent (single, medium-confidence source)" data-url="https://changemakers.indica.in/the-tree-that-must-consent-reviving-katamaraju-katha/">Indica</button></p>
+        </div>
+      </div>
+      <div class="cap cap-2">
+        <p class="label">Below the waterline · craft</p>
+        <h2 class="h2">Patience and <em class="em-accent">consent</em></h2>
+        <div class="s07-items">
+          <p class="body"><strong>Craft ethic.</strong> Painters draw &ldquo;just as a beautiful handwriting.&rdquo; <button class="src" data-cite="Hans India, 2017: Seshagiri Rao on Nakashi painters" data-url="https://thehansindia.com/posts/index/Sunday-Hans/2017-09-24/Exploring-the-art-of-masses/328641">Hans India</button></p>
+          <p class="body"><strong>Tree consent.</strong> The Puniki tree is asked for consent before cutting. <button class="src" data-cite="Indica Changemakers: the tree that must consent (single, medium-confidence source)" data-url="https://changemakers.indica.in/the-tree-that-must-consent-reviving-katamaraju-katha/">Indica</button></p>
+        </div>
+      </div>
+      <div class="cap cap-3">
+        <p class="label">Same method, new object</p>
+        <h2 class="h2">The surface moves. The <em class="em-accent">base</em> stays.</h2>
+        <p class="body">&ldquo;The medium might change, but the creative process and the use of natural colours remain the same.&rdquo; <button class="src" data-cite="Hans India, 2025: Sai Kiran Dhanalakota" data-url="https://www.thehansindia.com/news/cities/hyderabad/reviving-tradition-the-contemporary-touch-to-cheriyal-art-944310">Hans India</button></p>
+        <p class="mono s07-note">Group analysis. Whether buyers value these base values is untested.</p>
+      </div>
+    </div>
+  </div>
+  <template class="notes"><li>Visible object first, then what sits underneath</li><li>Pride: the patam, &ldquo;pride and identity&rdquo;</li><li>Patience: the hand-drawn line</li><li>Respect: tree consent (one source)</li><li>&ldquo;Same method, new object&rdquo;</li><li>Our diagram, not a source's</li></template>
 </section>
 <section class="scene bg-ochre" id="s07z" data-title="Act III · The market" data-kicker="Act III" data-steps="0" data-time="8">
 <div class="stage">
@@ -5196,11 +5328,6 @@ curIdx = i;
 pendingEnter = true;
 W.cherMorph(old, scenes[i], function () { pendingEnter = false; curIdx = old.index; doEnter(i, step, old, dir); }, function () {
 update();
-if (queuedDir) {
-var qd = queuedDir;
-queuedDir = 0;
-setTimeout(function () { if (qd > 0) next(); else prev(); }, 30);
-}
 });
 return;
 }
@@ -5341,7 +5468,7 @@ W.scrollTo(0, y);
 update();
 return;
 }
-var dur = Math.min(640, 380 + Math.abs(d) / vh * 70), t0 = performance.now();
+var dur = Math.min(1300, 760 + Math.abs(d) / vh * 140), t0 = performance.now();
 locked = true;
 var me = anim = { raf: 0 };
 function frame(now) {
@@ -9333,71 +9460,129 @@ progress: function () { }
 });
 })();
 (function () {
-if (!window.Deck) return;
-/* Iceberg camera: each key frame is a world rectangle [x, y, w, h] that must fit the art area. */
-var MX = [330, 700, 1035];
-function chain(i) { return [MX[i] - 280, 40, 700, 1250]; }
-var KF = [[470, -40, 680, 400], [-150, 230, 1680, 1250], chain(0), chain(1), chain(2), [-150, -30, 1680, 1520]];
-var N = KF.length - 1;
-var el, svg, cap, live = false, raf = 0, last = 0, s = 0, target = 0, fresh = false;
-function ease(x) { return x * x * (3 - 2 * x); }
-function rectAt(v) {
-v = Math.max(0, Math.min(N, v));
-var i = Math.min(N - 1, Math.floor(v)), f = ease(v - i), a = KF[i], b = KF[i + 1];
-var cx = a[0] + a[2] / 2 + (b[0] + b[2] / 2 - a[0] - a[2] / 2) * f;
-var cy = a[1] + a[3] / 2 + (b[1] + b[3] / 2 - a[1] - a[3] / 2) * f;
-var w = Math.exp(Math.log(a[2]) + (Math.log(b[2]) - Math.log(a[2])) * f);
-var h = Math.exp(Math.log(a[3]) + (Math.log(b[3]) - Math.log(a[3])) * f);
-return [cx, cy, w, h];
-}
-function apply(v) {
-if (!svg) return;
-var R = svg.getBoundingClientRect(), W = R.width, H = R.height;
-if (W < 10 || H < 10) return;
-var ax, ay, aw, ah;
-if (innerWidth < 900) { ax = 12; ay = 64; aw = W - 24; ah = H * .5 - 64; }
-else {
-var c = cap.getBoundingClientRect();
-ax = c.right - R.left + 28; ay = 70; aw = W - ax - Math.max(24, W * .03); ah = H - 70 - 86;
-}
-var r = rectAt(v), k = Math.min(aw / r[2], ah / r[3]);
-var vx = r[0] - (ax + aw / 2) / k, vy = r[1] - (ay + ah / 2) / k;
-svg.setAttribute('viewBox', vx.toFixed(1) + ' ' + vy.toFixed(1) + ' ' + (W / k).toFixed(1) + ' ' + (H / k).toFixed(1));
-}
-function frame(now) {
-raf = 0;
-if (!live || document.hidden) return;
-var dt = Math.min(.05, (now - last) / 1000 || .016);
-last = now;
-s += (target - s) * (1 - Math.exp(-dt * 4.2));
-if (Math.abs(target - s) < .001) s = target;
-apply(s);
-if (s !== target) raf = requestAnimationFrame(frame);
-}
-function bg(o) { var c = document.getElementById('cv-bg'); if (c) { c.style.transition = 'opacity .6s ease'; c.style.opacity = o ? '' : '0'; } }
-function kick() {
-if (!live || raf) return;
-if (Deck.reduced) { s = target; apply(s); return; }
-last = performance.now();
-raf = requestAnimationFrame(frame);
-}
-Deck.scene('s07', {
-init: function (e) {
-el = e; svg = el.querySelector('.ib-art'); cap = el.querySelector('.ib-cap');
-apply(0);
-addEventListener('resize', function () { if (live) apply(s); }, { passive: true });
-document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
-},
-enter: function () { live = true; fresh = true; cancelAnimationFrame(raf); raf = 0; bg(0); },
-leave: function () { live = false; cancelAnimationFrame(raf); raf = 0; bg(1); },
-step: function (e, i) { if (Deck.reduced) { target = s = i; apply(s); } },
-progress: function (e, p) {
-target = Math.max(0, Math.min(1, p)) * N;
-if (Deck.reduced) target = Math.round(target);
-if (fresh) { fresh = false; s = target; apply(s); return; }
-kick();
-}
-});
+  if (!window.Deck) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  var el, svg, cap, live = false, raf = 0, last = 0;
+  var tf, intro = 0, s = 0, target = 0, items = [], aspect = 1.25;
+  // camera keyframes per step: cy (centre y, world units), vh (visible height on a wide screen)
+  var KF = [{ cy: 470, vh: 640 }, { cy: 930, vh: 800 }, { cy: 1330, vh: 800 }, { cy: 1130, vh: 1450 }];
+
+  function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function ease(x) { x = clamp(x); return x * x * (3 - 2 * x); }
+  function cam(v) {
+    v = Math.max(0, Math.min(3, v));
+    var i = Math.min(2, Math.floor(v)), f = ease(v - i), a = KF[i], b = KF[i + 1];
+    var cy = a.cy + (b.cy - a.cy) * f, vh = a.vh + (b.vh - a.vh) * f;
+    var w = Math.max(vh * aspect, 720), h = w / aspect;
+    var fx = aspect > 1.4 ? .68 : .5;
+    svg.setAttribute('viewBox', (500 - w * fx).toFixed(1) + ' ' + (cy - h / 2).toFixed(1) + ' ' + w.toFixed(1) + ' ' + h.toFixed(1));
+  }
+
+  function build() {
+    var g = el.querySelector('#s07-wave'); if (!g) return;
+    var d1 = '', d2 = '', dots = '';
+    for (var x = -5000; x < 6000; x += 64) {
+      d1 += 'M' + x + ' 606 a32 30 0 0 0 64 0 Z ';
+      d2 += 'M' + (x + 32) + ' 640 a32 28 0 0 0 64 0 Z ';
+      dots += 'M' + (x + 32) + ' 618 h0.1 ';
+    }
+    function P(d, a) { var p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); for (var k in a) p.setAttribute(k, a[k]); g.appendChild(p); }
+    P('M-5000 596 H6000 V650 H-5000 Z', { fill: '#2b4fb8', stroke: '#0f0b09', 'stroke-width': 7 });
+    P(d2, { fill: '#6f93e0', stroke: '#0f0b09', 'stroke-width': 5, 'stroke-linejoin': 'round' });
+    P(d1, { fill: '#f4ead8', stroke: '#0f0b09', 'stroke-width': 6, 'stroke-linejoin': 'round' });
+    P(dots, { fill: 'none', stroke: '#0f0b09', 'stroke-width': 7, 'stroke-linecap': 'round' });
+  }
+
+  function collect() {
+    items = [];
+    var groups = svg.querySelectorAll('[data-r]');
+    for (var i = 0; i < groups.length; i++) {
+      var gEl = groups[i], r = gEl.getAttribute('data-r').split(','), a = +r[0], b = +r[1];
+      var intr = gEl.classList.contains('intro');
+      var kids = gEl.matches('.dr,.fl,.dt') ? [gEl] : [];
+      var all = gEl.querySelectorAll('.dr,.fl,.dt');
+      for (var j = 0; j < all.length; j++) kids.push(all[j]);
+      if (gEl.classList.contains('dt')) kids.push(gEl);
+      // draw elements need pathLength; shapes inside a .dr/.fl group inherit through children
+      items.push({ g: gEl, a: a, b: b, intr: intr, kids: kids, last: -1 });
+    }
+    // expand classes that sit on a <g> (children paths take over)
+    items.forEach(function (it) {
+      var ex = [];
+      it.kids.forEach(function (k) {
+        if (k.tagName === 'g' && (k.classList.contains('dr') || k.classList.contains('fl'))) {
+          var ch = k.querySelectorAll('path,circle,rect,ellipse');
+          for (var q = 0; q < ch.length; q++) { var c = ch[q]; ex.push({ e: c, dr: k.classList.contains('dr'), fl: k.classList.contains('fl'), dt: false }); }
+        } else ex.push({ e: k, dr: k.classList.contains('dr'), fl: k.classList.contains('fl'), dt: k.classList.contains('dt') });
+      });
+      it.kids = ex;
+    });
+    items.forEach(function (it) {
+      it.kids.forEach(function (k) {
+        if (k.dr) { k.e.setAttribute('pathLength', '1'); k.e.style.strokeDasharray = '1 1'; }
+      });
+    });
+  }
+
+  function paint(force) {
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i], v = it.intr ? intro : s;
+      var t = clamp((v - it.a) / (it.b - it.a));
+      if (!force && Math.abs(t - it.last) < .002) continue;
+      it.last = t;
+      var dr = ease(t / .5), fl = ease((t - .35) / .4), dt = ease((t - .7) / .3);
+      for (var j = 0; j < it.kids.length; j++) {
+        var k = it.kids[j], e = k.e, st = e.style;
+        if (k.dr) st.strokeDashoffset = (1 - dr).toFixed(3);
+        if (k.fl) { if (e.classList.contains('pl')) st.strokeOpacity = fl.toFixed(3); var fo = +e.getAttribute('data-fo') || 1; st.fillOpacity = (fl * fo).toFixed(3); }
+        if (k.dt && !k.dr) st.opacity = dt.toFixed(3);
+        else if (k.dt && k.dr) st.opacity = dt.toFixed(3);
+      }
+    }
+  }
+
+  function size() {
+    var r = svg.getBoundingClientRect();
+    if (r.width > 10 && r.height > 10) aspect = r.width / r.height;
+  }
+
+  /* the loop runs only while the intro or a scroll glide is moving; it parks once settled and kick() restarts it */
+  function frame(now) {
+    raf = 0;
+    if (!live) return;
+    var dt = Math.min(.05, (now - last) / 1000 || .016); last = now;
+    if (intro < 1) intro = Math.min(1, intro + dt / 2.4);
+    s += (target - s) * (1 - Math.exp(-dt * 7));
+    if (Math.abs(target - s) < .0005) s = target;
+    cam(s); paint(false); fade();
+    if (intro < 1 || s !== target) raf = requestAnimationFrame(frame);
+  }
+  function kick() {
+    if (!live || raf) return;
+    last = performance.now(); raf = requestAnimationFrame(frame);
+  }
+
+  function fade() { if (tf) tf.style.opacity = (1 - ease((s - .25) / .45)).toFixed(3); }
+  function snap() { s = target; intro = 1; size(); cam(s); paint(true); fade(); }
+
+  Deck.scene('s07', {
+    init: function (e) {
+      el = e; svg = el.querySelector('.s07-art svg'); cap = el.querySelector('.s07-cap');
+      if (!svg) return;
+      tf = el.querySelector('#s07-tipfade'); build(); collect(); size(); cam(0); paint(true);
+      window.addEventListener('resize', function () { size(); cam(s); });
+    },
+    enter: function () {
+      if (!svg) return;
+      size();
+      if (Deck.reduced) { target = 3; snap(); target = 0; return; }
+      intro = 0; paint(true);
+      live = true; cancelAnimationFrame(raf); raf = 0; kick();
+    },
+    leave: function () { live = false; cancelAnimationFrame(raf); raf = 0; },
+    step: function (e, i) { if (Deck.reduced && svg) { target = i; snap(); } },
+    progress: function (e, p) { target = clamp(p) * 3; if (Deck.reduced && svg) snap(); else kick(); }
+  });
 })();
 (function () {
 if (!window.Deck)
