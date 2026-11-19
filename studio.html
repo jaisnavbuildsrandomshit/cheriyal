@@ -545,6 +545,24 @@ footer.foot{margin-top:0}
 @media (prefers-reduced-motion:reduce){.panel.punch{animation:none}.hm,.hero-art::before{animation:none}.bdg.got{animation:none}}
 </style>
 <style id="studio-v2">
+#maker .mk-try{width:100%;min-height:54px;font-size:13px;background:var(--ochre);border-color:var(--ink);color:var(--ink);gap:10px}
+#maker .mk-try:hover{background:var(--ink);color:var(--cream)}
+#maker .mk-cam{display:inline-block;width:20px;height:14px;border:2px solid currentColor;border-radius:4px;position:relative;margin-right:8px;vertical-align:-2px}
+#maker .mk-cam::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border:2px solid currentColor;border-radius:50%}
+html.tryon-open,html.tryon-open body{overflow:hidden}
+.tryon{position:fixed;inset:0;z-index:500;background:#0f0b09;color:#f4ead8;overflow:hidden}
+.tryon video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0f0b09}
+.tryon.mirror video{transform:scaleX(-1)}
+.tryon .to-gl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0}
+.tryon .to-top{position:absolute;left:0;right:0;top:0;display:flex;gap:12px;align-items:flex-start;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 30px;background:linear-gradient(rgba(15,11,9,.75),rgba(15,11,9,0))}
+.tryon .to-status{margin:0;font:600 clamp(16px,2.2vw,20px)/1.3 var(--f-display);max-width:32ch}
+.tryon .btn{color:#f4ead8;border-color:#f4ead8;min-height:46px;background:rgba(15,11,9,.5)}
+.tryon .btn:hover{background:#f4ead8;color:#0f0b09}
+.tryon .btn.primary{background:var(--red);border-color:var(--red)}
+.tryon .to-bot{position:absolute;left:0;right:0;bottom:0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:40px 16px calc(env(safe-area-inset-bottom,0px) + 44px);background:linear-gradient(rgba(15,11,9,0),rgba(15,11,9,.75))}
+.tryon-open .play-sheet,.tryon-open .play-toast{z-index:600}
+.tryon .to-priv{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);margin:0;padding:0 16px;text-align:center;font:500 11px/1.35 var(--f-mono);letter-spacing:.04em;color:rgba(244,234,216,.75)}
+
 #maker .mk-hist{position:absolute;left:0;top:4px;z-index:2;display:flex;gap:6px}
 #maker .mk-hist .btn{min-height:44px;min-width:44px;padding:0 12px;font-size:20px;line-height:1;background:var(--cream)}
 #maker .mk-hist .btn:hover{background:var(--ink);color:var(--cream)}
@@ -649,6 +667,7 @@ footer.foot{margin-top:0}
         <div class="label mk-lab">Card background</div>
         <div class="mk-chips mk-grounds" id="mk-grounds" role="radiogroup" aria-label="Card background"></div>
       </div>
+      <button class="btn mk-try" id="mk-try" type="button"><span aria-hidden="true" class="mk-cam"></span>Try it on with your camera</button>
       <button class="btn primary mk-save" id="mk-save" type="button">Save as image</button>
       <div class="mk-acts">
         <button class="btn" id="mk-share" type="button">Share link</button>
@@ -1183,10 +1202,11 @@ var M3D = window.M3D = (function(){
   function RZ(a){ var c = Math.cos(a), s = Math.sin(a); return [c,s,0,0, -s,c,0,0, 0,0,1,0, 0,0,0,1]; }
   function persp(f, asp, n, fa){ var t = 1 / Math.tan(f/2); return [t/asp,0,0,0, 0,t,0,0, 0,0,(fa+n)/(n-fa),-1, 0,0,2*fa*n/(n-fa),0]; }
   Renderer.prototype.draw = function(yaw, pitch, roll, fit){
-    var gl = this.gl, cv = this.canvas, L = this.loc; if(!this.parts) return;
+    var gl = this.gl, cv = this.canvas, L = this.loc, vp = this._vp; if(!this.parts) return;
     gl.viewport(0, 0, cv.width, cv.height); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    if(vp) gl.viewport(vp.x, vp.y, vp.w, vp.h);
     gl.enable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE);
-    var cy = 0.3, dist = fit || 6.3, asp = cv.width / cv.height;
+    var cy = 0.3, dist = fit || 6.3, asp = vp ? vp.w / vp.h : cv.width / cv.height;
     var VP = mul(persp(0.5, asp, 0.5, 30), T(0, -cy, -dist));
     var M = mul(T(0, 0.2, 0.25), mul(RZ(roll || 0), mul(RY(yaw || 0), mul(RX(pitch || 0), T(0, -0.2, -0.25)))));
     gl.uniformMatrix4fv(L.uVP, false, new Float32Array(VP)); gl.uniformMatrix4fv(L.uM, false, new Float32Array(M)); gl.uniform3f(L.uEye, 0, cy, dist); gl.uniform1f(L.uDim, 1);
@@ -1237,6 +1257,13 @@ var M3D = window.M3D = (function(){
         gl.drawElements(gl.TRIANGLES, b.n, gl.UNSIGNED_SHORT, 0);
       });
     });
+  };
+  Renderer.prototype.drawIn = function(vp, yaw, pitch, roll, fit){ this._vp = vp; try{ this.draw(yaw, pitch, roll, fit); } finally { this._vp = null; } };
+  Renderer.prototype.clear = function(){ var gl = this.gl; gl.viewport(0, 0, this.canvas.width, this.canvas.height); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); };
+  Renderer.prototype.projectSq = function(pt, fit){
+    var m = mats({width:1, height:1}, 0, 0, 0, fit, [0, 0, 0]), A = mul(m.VP, m.M), v = [pt[0], pt[1], pt[2], 1], r = [0,0,0,0];
+    for(var i = 0; i < 4; i++) for(var k = 0; k < 4; k++) r[i] += A[k*4+i] * v[k];
+    return [r[0] / r[3] * .5 + .5, .5 - r[1] / r[3] * .5];
   };
   Renderer.prototype.project = function(pt, off, yaw, pitch, roll, fit){
     var m = mats(this.canvas, yaw, pitch, roll, fit, off), A = mul(m.VP, m.M), v = [pt[0], pt[1], pt[2], 1], r = [0,0,0,0];
@@ -1888,6 +1915,139 @@ var BOOT = null, fromLink = false;
   if(BOOT){ D = BOOT.d; if(R){ try{ R.set(D); }catch(e){} } forceLook = true; nameIn.value = BOOT.n; setName(BOOT.n); }
 })();
 
+
+/* ---------- try it on: camera + MediaPipe face tracking (loaded only when opened) ---------- */
+var MP_VER = '0.10.20', MP_URL = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@' + MP_VER;
+var MP_MODEL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
+var lmP = null;
+function landmarker(){
+  if(!lmP){
+    lmP = (async function(){
+      var v = await import(MP_URL + '/vision_bundle.mjs');
+      var files = await v.FilesetResolver.forVisionTasks(MP_URL + '/wasm');
+      var make = function(dlg){ return v.FaceLandmarker.createFromOptions(files, {baseOptions:{modelAssetPath:MP_MODEL, delegate:dlg}, runningMode:'VIDEO', numFaces:1}); };
+      try{ return await make('GPU'); }catch(e){ return await make('CPU'); }
+    })();
+    lmP.catch(function(){ lmP = null; });
+  }
+  return lmP;
+}
+var TO = null;
+function tryOn(){
+  if(!R){ Play.toast('Trying it on needs 3D, which is off on this device'); return; }
+  if(TO){ return; }
+  var ov = document.createElement('div'); ov.className = 'tryon'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); ov.setAttribute('aria-label', 'Try your mask on');
+  ov.innerHTML = '<video playsinline muted autoplay></video><canvas class="to-gl" aria-hidden="true"></canvas>' +
+    '<div class="to-top"><p class="to-status" role="status" aria-live="polite">Starting the camera…</p><button class="btn to-x" type="button">Close</button></div>' +
+    '<div class="to-bot"><button class="btn primary to-snap" type="button" disabled>Take a photo</button><button class="btn to-flip" type="button" hidden>Switch camera</button></div>' +
+    '<p class="to-priv">The video stays on this device. Face tracking uses Google’s MediaPipe, downloaded the first time you open this.</p>';
+  document.body.appendChild(ov); document.documentElement.classList.add('tryon-open');
+  var video = ov.querySelector('video'), gcv = ov.querySelector('.to-gl'), status = ov.querySelector('.to-status');
+  var snapB = ov.querySelector('.to-snap'), flipB = ov.querySelector('.to-flip'), closeB = ov.querySelector('.to-x');
+  var st = {stream:null, facing:'user', raf:0, lm:null, lastVT:-1, seen:0, lostAt:0, track:false, cal:[], v0:.78, k:null, mask:null, alpha:0, dead:false};
+  TO = st;
+  var R2 = null; try{ R2 = M3D.live(gcv); R2.set(D); R2.look(0, 0, 0); }catch(e){ R2 = null; }
+  /* where the mask's painted eyes sit in a square viewport, for aligning them with the wearer's eyes */
+  var FIT = 7.0, EY = (function(){
+    var P = R2 && R2.parts && R2.parts[0] && R2.parts[0].m.P, out = [];
+    [-1, 1].forEach(function(sd){
+      var tx = sd * .31, ty = .19, bz = .3, bd = 1e9;
+      if(P) for(var j = 0; j < P.length; j += 3){ var dx = P[j] - tx, dy = P[j + 1] - ty, dd = dx * dx + dy * dy; if(dd < bd){ bd = dd; bz = P[j + 2]; } }
+      out.push(R2 ? R2.projectSq([tx, ty, bz], FIT) : [.5 + sd * .1, .4]);
+    });
+    return {mx:(out[0][0] + out[1][0]) / 2, my:(out[0][1] + out[1][1]) / 2, d:Math.abs(out[1][0] - out[0][0])};
+  })();
+  var cur = null;
+  function say(t){ if(status.textContent !== t) status.textContent = t; }
+  function sizeGL(){ var w = gcv.clientWidth, h = gcv.clientHeight, d = M3D.dpr(w, h); var W = Math.round(w * d), H = Math.round(h * d); if(gcv.width !== W || gcv.height !== H){ gcv.width = W; gcv.height = H; } }
+  function cover(){ var W = ov.clientWidth, H = ov.clientHeight, vw = video.videoWidth || 1280, vh = video.videoHeight || 720, sc = Math.max(W / vw, H / vh); return {W:W, H:H, vw:vw, vh:vh, s:sc, dx:(W - vw * sc) / 2, dy:(H - vh * sc) / 2, mir:st.facing === 'user'}; }
+  function pt(c, p){ var x = c.dx + p.x * c.vw * c.s, y = c.dy + p.y * c.vh * c.s; return {x:c.mir ? c.W - x : x, y:y}; }
+  function avg(a, b){ return {x:(a.x + b.x) / 2, y:(a.y + b.y) / 2}; }
+  function pose(lms){
+    var c = cover(), A = avg(pt(c, lms[33]), pt(c, lms[133])), B = avg(pt(c, lms[362]), pt(c, lms[263])), L = A.x < B.x ? A : B, Rr = A.x < B.x ? B : A;
+    var mid = avg(L, Rr), dx = Rr.x - L.x, dy = Rr.y - L.y, dist = Math.hypot(dx, dy) || 1, ax = {x:dx / dist, y:dy / dist}, nose = pt(c, lms[1]);
+    var u = ((nose.x - mid.x) * ax.x + (nose.y - mid.y) * ax.y) / dist, v = ((nose.x - mid.x) * -ax.y + (nose.y - mid.y) * ax.x) / dist;
+    if(st.cal.length < 20 && Math.abs(u) < .08){ st.cal.push(v); var srt = st.cal.slice().sort(); st.v0 = srt[srt.length >> 1]; }
+    var cl = function(x){ return Math.max(-.95, Math.min(.95, x)); };
+    return {x:mid.x, y:mid.y, s:dist / EY.d * 1.04, yaw:Math.asin(cl(u * 1.7)), pitch:Math.asin(cl((v - st.v0) * 1.5)), roll:-Math.atan2(dy, dx)};
+  }
+  function smooth(t, k){ if(!cur){ cur = {x:t.x, y:t.y, s:t.s, yaw:t.yaw, pitch:t.pitch, roll:t.roll}; return; } for(var q in t) cur[q] += (t[q] - cur[q]) * k; }
+  function draw(){
+    if(!R2 || !cur) return;
+    var d = gcv.width / Math.max(1, gcv.clientWidth), S = cur.s, x0 = cur.x - EY.mx * S, y0 = cur.y - EY.my * S;
+    R2.drawIn({x:Math.round(x0 * d), y:Math.round((gcv.clientHeight - y0 - S) * d), w:Math.round(S * d), h:Math.round(S * d)}, cur.yaw, cur.pitch, cur.roll, FIT);
+  }
+  function frame(now){
+    st.raf = requestAnimationFrame(frame);
+    if(document.hidden || video.readyState < 2) return;
+    sizeGL();
+    if(st.lm && video.currentTime !== st.lastVT){
+      st.lastVT = video.currentTime;
+      var r = null; try{ r = st.lm.detectForVideo(video, now); }catch(e){ r = null; }
+      if(r && r.faceLandmarks && r.faceLandmarks.length){ smooth(pose(r.faceLandmarks[0]), st.seen ? .55 : 1); st.seen++; st.lostAt = 0; say('Move your head: the mask follows.'); }
+      else { if(!st.lostAt) st.lostAt = now; if(now - st.lostAt > 600) say('Looking for your face… face the camera in good light.'); }
+    }
+    if(!st.lm && !st.track){ var c = cover(), S = Math.min(c.W, c.H) * .62 / EY.d * .34; cur = {x:c.W / 2, y:c.H * .42, s:S, yaw:0, pitch:0, roll:0}; }
+    var want = cur && (!st.lm || !st.lostAt || now - st.lostAt < 600) ? 1 : 0;
+    st.alpha += (want - st.alpha) * .25; gcv.style.opacity = st.alpha.toFixed(3);
+    st.cur = cur;
+    if(cur) draw(); else if(R2) R2.clear();
+    snapB.disabled = !cur;
+  }
+  async function start(){
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){ say('The camera needs a secure (https) page and a browser that allows it.'); return; }
+    try{
+      if(st.stream) st.stream.getTracks().forEach(function(t){ t.stop(); });
+      st.stream = await navigator.mediaDevices.getUserMedia({audio:false, video:{facingMode:st.facing, width:{ideal:1280}, height:{ideal:720}}});
+      if(st.dead){ st.stream.getTracks().forEach(function(t){ t.stop(); }); return; }
+      video.srcObject = st.stream; ov.classList.toggle('mirror', st.facing === 'user');
+      try{ await video.play(); }catch(e){}
+      try{ var devs = await navigator.mediaDevices.enumerateDevices(); flipB.hidden = devs.filter(function(x){ return x.kind === 'videoinput'; }).length < 2; }catch(e){}
+    }catch(e){
+      var n = e && e.name;
+      say(n === 'NotAllowedError' ? 'Camera access was blocked. Allow the camera for this site in your browser settings, then try again.' : n === 'NotFoundError' || n === 'OverconstrainedError' ? 'No camera was found on this device.' : 'The camera could not start.');
+      return;
+    }
+    cancelAnimationFrame(st.raf); st.raf = requestAnimationFrame(frame);
+    if(!st.lm){
+      say('Loading face tracking…');
+      try{ st.lm = await landmarker(); if(!st.dead) say('Face the camera.'); }
+      catch(e){ st.track = false; say('Face tracking could not load. Line your face up with the mask instead.'); }
+    }
+  }
+  function close(){
+    st.dead = true; cancelAnimationFrame(st.raf);
+    if(st.stream) st.stream.getTracks().forEach(function(t){ t.stop(); });
+    try{ var gl = gcv.getContext('webgl'), lose = gl && gl.getExtension('WEBGL_lose_context'); if(lose) lose.loseContext(); }catch(e){}
+    ov.remove(); document.documentElement.classList.remove('tryon-open'); document.removeEventListener('keydown', esc); TO = null;
+    try{ tryB.focus({preventScroll:true}); }catch(e){}
+  }
+  function esc(e){ if(e.key === 'Escape') close(); }
+  closeB.addEventListener('click', close); document.addEventListener('keydown', esc);
+  flipB.addEventListener('click', function(){ st.facing = st.facing === 'user' ? 'environment' : 'user'; st.cal = []; cur = null; start(); });
+  snapB.addEventListener('click', async function(){
+    if(!cur || !R2) return;
+    var c = cover(), k = Math.min(2, window.devicePixelRatio || 1), W = Math.round(c.W * k), H = Math.round(c.H * k), cap = Math.round(Math.max(64, W * .1));
+    var out = document.createElement('canvas'); out.width = W; out.height = H + cap; var g = out.getContext('2d');
+    g.save(); if(c.mir){ g.translate(W, 0); g.scale(-1, 1); }
+    g.drawImage(video, c.dx * k, c.dy * k, c.vw * c.s * k, c.vh * c.s * k); g.restore();
+    draw(); g.drawImage(gcv, 0, 0, W, H);
+    g.fillStyle = '#f4ead8'; g.fillRect(0, H, W, cap); g.fillStyle = '#0f0b09';
+    g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = '700 ' + Math.round(cap * .42) + 'px Fraunces,Georgia,serif';
+    g.fillText((name.trim() || 'My Cheriyal Mask'), W / 2, H + cap * .42);
+    g.fillStyle = 'rgba(15,11,9,.6)'; g.font = '500 ' + Math.round(cap * .18) + 'px "JetBrains Mono",ui-monospace,monospace';
+    g.fillText('CHERIYAL MASK STUDIO', W / 2, H + cap * .8);
+    var fn = 'cheriyal-try-on-' + ((name.trim() || 'mask').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 24) || 'mask') + '.png';
+    await Play.save(out, fn);
+  });
+  window.addEventListener('resize', sizeGL);
+  closeB.focus({preventScroll:true});
+  st.raf = requestAnimationFrame(frame);
+  start();
+}
+var tryB = root.querySelector('#mk-try');
+tryB.addEventListener('click', tryOn);
+
 /* ---------- start ---------- */
 setGround(BOOT ? BOOT.g : 'red'); syncButtons(); size();
 booted = true; afterChange(); drawShelf();
@@ -1895,7 +2055,7 @@ if(fromLink){
   try{ history.replaceState(null, '', location.pathname + location.search + '#maker'); }catch(e){}
   setTimeout(function(){ root.scrollIntoView({block:'start'}); Play.toast('Opened a shared mask'); }, 60);
 }
-window.__mk = {get design(){ return D; }, get ground(){ return ground; }, get name(){ return name; }, exportCard:exportCard, apply:applyDesign, code:code, decode:decode, link:link, paperMask:paperMask, undo:function(){ jump(-1); }, redo:function(){ jump(1); }, get history(){ return {n:hist.length, i:hi}; }};
+window.__mk = {tryOn:tryOn, get tryState(){ return TO; }, get design(){ return D; }, get ground(){ return ground; }, get name(){ return name; }, exportCard:exportCard, apply:applyDesign, code:code, decode:decode, link:link, paperMask:paperMask, undo:function(){ jump(-1); }, redo:function(){ jump(1); }, get history(){ return {n:hist.length, i:hi}; }};
 })();
 
 (function(){

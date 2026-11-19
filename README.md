@@ -29,6 +29,7 @@ An interactive, scroll-driven presentation about **Cheriyal art**, a painted sto
 - The whole deck is **one HTML file**: text, art, animation and scripts are included, with no external services or accounts.
 - Scroll, the arrow keys or swipe to move through the slides. Press **O** for the overview and **?** for all keyboard shortcuts.
 - Motion is reduced automatically when your system asks for it.
+- The Mask Studio's **Try it on** button uses your camera with Google's MediaPipe face tracker, downloaded from a CDN the first time you press it. The video stays on your device and is never uploaded.
 
 ## Honesty note
 
